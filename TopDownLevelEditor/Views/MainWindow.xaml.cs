@@ -8,5 +8,10 @@ namespace TopDownLevelEditor.Views
         {
             InitializeComponent();
         }
+
+        private void RoomTileEditorView_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+
+        }
     }
 }
