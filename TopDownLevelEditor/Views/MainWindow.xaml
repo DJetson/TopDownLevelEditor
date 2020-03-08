@@ -14,10 +14,14 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding BrushX}"/>
-        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding BrushY}"/>
-        
-        <Views:RoomTileEditorView Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" PreviewMouseLeftButtonDown="RoomTileEditorView_PreviewMouseLeftButtonDown" Margin="10" DataContext="{Binding EditorContext}"/>
+        <Views:BlueprintLibraryView Grid.RowSpan="2" DataContext="{Binding LevelContext.BlueprintLibrary}"/>
+
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding BrushX}"/>
+        <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding BrushY}"/>
+        <ScrollViewer Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"  HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+            <Views:RoomTileEditorView Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" PreviewMouseLeftButtonDown="RoomTileEditorView_PreviewMouseLeftButtonDown" Margin="10" DataContext="{Binding LevelContext.BlueprintLibrary.SelectedBlueprint}"/>
+        </ScrollViewer>
     </Grid>
 </Window>

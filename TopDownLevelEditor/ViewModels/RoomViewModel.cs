@@ -27,14 +27,14 @@ namespace TopDownLevelEditor.ViewModels
             set { _Tiles = value; NotifyPropertyChanged(); }
         }
 
-        private double _ZoomX = 0.6f;
+        private double _ZoomX = 0.52f;
         public double ZoomX
         {
             get => _ZoomX;
             set { _ZoomX = value; NotifyPropertyChanged(); }
         }
 
-        private double _ZoomY = 0.6f;
+        private double _ZoomY = 0.52f;
         public double ZoomY
         {
             get => _ZoomY;
@@ -80,7 +80,7 @@ namespace TopDownLevelEditor.ViewModels
                 if (amount < 0)
                     return false;
             }
-            if(ZoomX < 0.11f || ZoomY < 0.11f)
+            if(ZoomX < 0.51f || ZoomY < 0.51f)
             {
                 if (amount > 0)
                     return false;

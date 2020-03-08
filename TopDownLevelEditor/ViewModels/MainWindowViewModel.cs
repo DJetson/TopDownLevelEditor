@@ -16,17 +16,17 @@ namespace TopDownLevelEditor.ViewModels
             set { _LevelContext = value; NotifyPropertyChanged(); }
         }
 
-        private IRoomBlueprint _EditorContext;
-        public IRoomBlueprint EditorContext
-        {
-            get => _EditorContext;
-            set { _EditorContext = value; NotifyPropertyChanged(); }
-        }
+        //private IRoomBlueprint _EditorContext;
+        //public IRoomBlueprint EditorContext
+        //{
+        //    get => _EditorContext;
+        //    set { _EditorContext = value; NotifyPropertyChanged(); }
+        //}
 
         public MainWindowViewModel()
         {
-            LevelContext.BlueprintLibrary.AddNewRoomBlueprint();
-            EditorContext = LevelContext.BlueprintLibrary.BlueprintItems.First();
+            //LevelContext.BlueprintLibrary.AddNewRoomBlueprint();
+            //EditorContext = LevelContext.BlueprintLibrary.BlueprintItems.First();
         }
 
         private int _BrushX = 0;

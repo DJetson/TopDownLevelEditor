@@ -76,12 +76,12 @@ namespace TopDownLevelEditor.ViewModels
             get => _BlueprintLibrary;
             set { _BlueprintLibrary = value; NotifyPropertyChanged(); }
         }
-        private IBlueprintLibrary _BlueprintLibrary = new BlueprintLibraryViewModel();
+        private IBlueprintLibrary _BlueprintLibrary;
 
 
         public LevelViewModel()
         {
-            BlueprintLibrary = new BlueprintLibraryViewModel() { ParentLevel = this };
+            BlueprintLibrary = new BlueprintLibraryViewModel(this);
         }
     }
 }

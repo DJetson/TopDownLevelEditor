@@ -64,6 +64,9 @@
     <Compile Include="ViewModels\LevelPropertiesViewModel.cs" />
     <Compile Include="ViewModels\TileBrushViewModel.cs" />
     <Compile Include="ViewModels\TileViewModel.cs" />
+    <Compile Include="Views\BlueprintLibraryView.xaml.cs">
+      <DependentUpon>BlueprintLibraryView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Gestures\MouseWheelUpGesture.cs" />
     <Compile Include="Views\RoomTileEditorView.xaml.cs">
       <DependentUpon>RoomTileEditorView.xaml</DependentUpon>
@@ -71,6 +74,10 @@
     <Compile Include="Views\TileView.xaml.cs">
       <DependentUpon>TileView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\BlueprintLibraryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
