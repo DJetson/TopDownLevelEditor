@@ -133,37 +133,5 @@ namespace TopDownLevelEditor.ViewModels
         {
 
         }
-
-        //public LevelBlueprintPropertiesViewModel(SerializationInfo info, StreamingContext context)
-        //{
-        //    DeserializeImageSources(info, context);
-        //    TileWidth = info.GetValue<double>(nameof(TileWidth));
-        //    TileHeight = info.GetValue<double>(nameof(TileHeight));
-        //    RoomWidth = info.GetValue<int>(nameof(RoomWidth));
-        //    RoomHeight = info.GetValue<int>(nameof(RoomHeight));
-        //}
-
-        //public void GetObjectData(SerializationInfo info, StreamingContext context)
-        //{
-        //    SerializeImageSources(info, context);
-        //    info.AddValue(nameof(TileWidth), _TileWidth);
-        //    info.AddValue(nameof(TileHeight), _TileHeight);
-        //    info.AddValue(nameof(RoomWidth), _RoomWidth);
-        //    info.AddValue(nameof(RoomHeight), _RoomHeight);
-        //}
-
-        //private void SerializeImageSources(SerializationInfo info, StreamingContext context)
-        //{
-        //    info.AddValue(nameof(RoomBackgroundImageSource), _RoomBackgroundImageSource, typeof(string));
-        //    info.AddValue(nameof(TilePaletteImageSource), _TilePaletteImageSource, typeof(string));
-
-        //    //Serialize the in memory image data here
-        //}
-
-        //private void DeserializeImageSources(SerializationInfo info, StreamingContext context)
-        //{
-        //    RoomBackgroundImageSource = info.GetValue<string>(nameof(RoomBackgroundImageSource));
-        //    TilePaletteImageSource = info.GetValue<string>(nameof(TilePaletteImageSource));
-        //}
     }
 }

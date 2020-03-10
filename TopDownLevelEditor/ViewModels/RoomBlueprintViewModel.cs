@@ -66,10 +66,7 @@ namespace TopDownLevelEditor.ViewModels
         public DelegateCommand ZoomCommand
         {
             get => new DelegateCommand(ZoomCommand_Execute, ZoomCommand_CanExecute);//_ZoomCommand;
-            //set { _ZoomCommand = value; NotifyPropertyChanged(); }
         }
-        //[NonSerialized]
-        //private DelegateCommand _ZoomCommand;
 
         /// <summary>
         /// <see cref="DelegateCommand"/> that can be used by a <see cref="ICommandSource"/> in the View Layer to trigger execution of the <see cref="RoomBlueprintViewModel.AddTile(int, int, int)"/> method
@@ -77,10 +74,7 @@ namespace TopDownLevelEditor.ViewModels
         public DelegateCommand AddTileCommand
         {
             get => new DelegateCommand(AddTileCommand_Execute, AddTileCommand_CanExecute);//_AddTileCommand;
-            //set { _AddTileCommand = value; NotifyPropertyChanged(); }
         }
-        //[NonSerialized]
-        //private DelegateCommand _AddTileCommand;
 
         public RoomBlueprintViewModel()
         {
@@ -89,8 +83,6 @@ namespace TopDownLevelEditor.ViewModels
 
         public void InitializeCommands()
         {
-            //AddTileCommand = new DelegateCommand(AddTileCommand_Execute, AddTileCommand_CanExecute);
-            //ZoomCommand = new DelegateCommand(ZoomCommand_Execute, ZoomCommand_CanExecute);
         }
 
         private bool ZoomCommand_CanExecute(object obj)
@@ -130,7 +122,6 @@ namespace TopDownLevelEditor.ViewModels
 
         private bool AddTileCommand_CanExecute(object obj)
         {
-            //throw new NotImplementedException();
             return true;
         }
 
@@ -144,25 +135,6 @@ namespace TopDownLevelEditor.ViewModels
             int tileId = PaletteViewModel.GetTileBrush().TileId;
 
             AddTile(tileId, roomGridX, roomGridY);
-
-            //int paletteGridX = PaletteViewModel.GetTileBrush().TilePaletteX;
-            //int paletteGridY = PaletteViewModel.GetTileBrush().TilePaletteY;
-
-            //var existingTile = Tiles.Where(e => e.RoomGridX == roomGridX && e.RoomGridY == roomGridY).FirstOrDefault();
-
-            //if (existingTile != null)
-            //{
-            //    Tiles.Remove(existingTile);
-            //}
-            //Tiles.Add(new TileViewModel(tileId, paletteGridX, paletteGridY)
-            //{
-            //    TileWidth = ParentLevel.LevelProperties.TileWidth,
-            //    TileHeight = ParentLevel.LevelProperties.TileHeight,
-            //    RoomGridX = roomGridX,
-            //    RoomGridY = roomGridY,
-            //    RoomDrawPositionX = roomGridX * ParentLevel.LevelProperties.TileWidth,
-            //    RoomDrawPositionY = roomGridY * ParentLevel.LevelProperties.TileHeight
-            //});
         }
 
         /// <summary>
@@ -173,12 +145,6 @@ namespace TopDownLevelEditor.ViewModels
         /// <param name="roomGridY">The Y-Axis placement position of the new <see cref="ITile"/> in the <see cref="Tiles"/> grid</param>
         public void AddTile(int tileId, int roomGridX, int roomGridY)
         {
-            //var pos = Mouse.GetPosition(obj as IInputElement);
-
-            //int roomGridX = (int)(pos.X / ParentLevel.LevelProperties.TileWidth);
-            //int roomGridY = (int)(pos.Y / ParentLevel.LevelProperties.TileHeight);
-
-            //int tileId = PaletteViewModel.GetTileBrush().TileId;
             int paletteGridX = PaletteViewModel.GetTileBrush().PaletteGridX;
             int paletteGridY = PaletteViewModel.GetTileBrush().PaletteGridY;
 
@@ -194,29 +160,7 @@ namespace TopDownLevelEditor.ViewModels
                 TileHeight = ParentLevel.LevelProperties.TileHeight,
                 RoomGridX = roomGridX,
                 RoomGridY = roomGridY,
-                //RoomDrawPositionX = roomGridX * ParentLevel.LevelProperties.TileWidth,
-                //RoomDrawPositionY = roomGridY * ParentLevel.LevelProperties.TileHeight
             });
         }
-
-        //public RoomBlueprintViewModel(SerializationInfo info, StreamingContext context)
-        //{
-        //    Tiles = info.GetValue<ObservableCollection<ITile>>(nameof(Tiles));
-        //    InitializeCommands();
-        //}
-
-        //public void GetObjectData(SerializationInfo info, StreamingContext context)
-        //{
-        //    info.AddValue(nameof(Tiles), _Tiles);
-        //    //SerializeTiles(info, context);
-        //}
-
-        //private void SerializeTiles(SerializationInfo info, StreamingContext context)
-        //{
-        //    foreach (var tile in Tiles)
-        //    {
-        //        tile.GetObjectData(info, context);
-        //    }
-        //}
     }
 }

@@ -20,32 +20,18 @@ namespace TopDownLevelEditor.ViewModels
             set { _LevelContext = value; NotifyPropertyChanged(); }
         }
 
-        //private DelegateCommand _SaveLevelBlueprintCommand;
         public DelegateCommand SaveLevelBlueprintCommand
         {
             get => new DelegateCommand(SaveLevelBlueprint_Execute);/*_SaveLevelBlueprintCommand;*/
-            //set { _SaveLevelBlueprintCommand = value; NotifyPropertyChanged(); }
         }
 
-        //private DelegateCommand _LoadLevelBlueprintCommand;
         public DelegateCommand LoadLevelBlueprintCommand
         {
             get => new DelegateCommand(LoadLevelBlueprint_Execute); //_LoadLevelBlueprintCommand;
-            //set { _LoadLevelBlueprintCommand = value; NotifyPropertyChanged(); }
         }
-        //private IRoomBlueprint _EditorContext;
-        //public IRoomBlueprint EditorContext
-        //{
-        //    get => _EditorContext;
-        //    set { _EditorContext = value; NotifyPropertyChanged(); }
-        //}
 
         public MainWindowViewModel()
         {
-            //SaveLevelBlueprintCommand = new DelegateCommand(SaveLevelBlueprint_Execute);
-            //LoadLevelBlueprintCommand = new DelegateCommand(LoadLevelBlueprint_Execute);
-            //LevelContext.BlueprintLibrary.AddNewRoomBlueprint();
-            //EditorContext = LevelContext.BlueprintLibrary.BlueprintItems.First();
         }
 
         private void LoadLevelBlueprint_Execute(object obj)

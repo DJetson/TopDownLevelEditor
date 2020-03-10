@@ -67,8 +67,6 @@
     <Compile Include="Interfaces\IBlueprintSerializer.cs" />
     <Compile Include="Interfaces\ILevelBlueprintProperties.cs" />
     <Compile Include="Interfaces\ISerializableBlueprint.cs" />
-    <Compile Include="Serialization\LevelBlueprintSerializer.cs" />
-    <Compile Include="Serialization\TileSerializer.cs" />
     <Compile Include="Serialization\TokenizeRoomSerializer.cs" />
     <Compile Include="Interfaces\ILevelBlueprint.cs" />
     <Compile Include="ViewModels\LevelBlueprintPropertiesViewModel.cs" />

@@ -11,7 +11,6 @@
              xmlns:Interfaces="clr-namespace:TopDownLevelEditor.Interfaces"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <!--<ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">-->
         <Grid>
             <Border Background="Gray" BorderBrush="Black" BorderThickness="2" >
                 <Border.InputBindings>
@@ -23,7 +22,6 @@
                         <ScaleTransform ScaleX="{Binding ZoomX}" ScaleY="{Binding ZoomY}"/>
                     </Border.LayoutTransform>
                     <Grid Width="{Binding ParentLevel.LevelProperties.BackgroundWidth}" Height="{Binding ParentLevel.LevelProperties.BackgroundHeight}">
-                        
                         <Grid>
                             <Grid.Background>
                                 <VisualBrush TileMode="None" Stretch="UniformToFill" >
@@ -33,7 +31,6 @@
                                 </VisualBrush>
                             </Grid.Background>
                         </Grid>
-
                         <ItemsControl x:Name="TileItemsControl" ItemsSource="{Binding Tiles}">
                         <ItemsControl.ItemContainerStyle>
                             <Style TargetType="{x:Type ContentPresenter}">
@@ -43,45 +40,16 @@
                                 </Style.Setters>
                             </Style>
                         </ItemsControl.ItemContainerStyle>
-                            <!--<ItemsControl.Background>
-                        <VisualBrush TileMode="Tile" Stretch="Uniform" Viewport="{Binding TileGridViewport}" ViewportUnits="Absolute">
-                            <VisualBrush.Visual>
-                                <Grid Margin="-1,-1,0,0">
-                                    <Border Width="{Binding ParentLevel.LevelProperties.TileWidth}" Height="{Binding ParentLevel.LevelProperties.TileHeight}" BorderThickness="1" BorderBrush="DarkGray"/>
-                                </Grid>
-                            </VisualBrush.Visual>
-                        </VisualBrush>
-                    </ItemsControl.Background>-->
-
                             <ItemsControl.ItemTemplate>
                                 <ItemContainerTemplate>
-                                    <!--<ContentPresenter Canvas.Left="{Binding RoomDrawPositionX}" Canvas.Top="{Binding RoomDrawPositionY}">
-                                        <ContentPresenter.Content>-->
-                                            <!--<DataTemplate DataType="{x:Type ViewModels:TileViewModel}">-->
                                             <Views:TileView DataContext="{Binding }"/>
-                                            <!--</DataTemplate>-->
-                                        <!--</ContentPresenter.Content>
-                                    </ContentPresenter>-->
                                 </ItemContainerTemplate>
                             </ItemsControl.ItemTemplate>
-                            <!--<ItemsControl.Resources>
-                                <DataTemplate DataType="{x:Type ViewModels:TileViewModel}">
-                                    <Views:TileView DataContext="{Binding }" Canvas.Left="{Binding RoomDrawPositionX}" Canvas.Top="{Binding RoomDrawPositionY}" />
-                                </DataTemplate>
-                            </ItemsControl.Resources>-->
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <Canvas />
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
-                            
-                            <!--<i:Interaction.Triggers>
-                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                        -->
-                            <!--<i:InvokeCommandAction Command="{Binding AddTileCommand}" CommandParameter="{Binding e, RelativeSource={RelativeSource Self}}"/>-->
-                            <!--
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>-->
                         </ItemsControl>
                         <Grid Width="{Binding ParentLevel.LevelProperties.ActualWidth}" Height="{Binding ParentLevel.LevelProperties.ActualHeight}">
                             <Grid.InputBindings>
@@ -101,5 +69,4 @@
                 </Border>
             </Border>
         </Grid>
-    <!--</ScrollViewer>-->
 </UserControl>

@@ -35,26 +35,18 @@ namespace TopDownLevelEditor.ViewModels
             set { _SelectedBlueprint = value; NotifyPropertyChanged(); }
         }
 
-        //[NonSerialized]
-        //private DelegateCommand _AddBlueprintCommand;
         public DelegateCommand AddBlueprintCommand
         {
             get => new DelegateCommand(AddBlueprint_Execute); //_AddBlueprintCommand;
-            //set { _AddBlueprintCommand = value; NotifyPropertyChanged(); }
         }
 
-        //[NonSerialized]
-        //private DelegateCommand _RemoveBlueprintCommand;
         public DelegateCommand RemoveBlueprintCommand
         {
             get => new DelegateCommand(RemoveBlueprint_Execute, RemoveBlueprint_CanExecute);//_RemoveBlueprintCommand;
-            //set { _RemoveBlueprintCommand = value; NotifyPropertyChanged(); }
         }
 
         public void InitializeCommands()
         {
-            //AddBlueprintCommand = new DelegateCommand(AddBlueprint_Execute);
-            //RemoveBlueprintCommand = new DelegateCommand(RemoveBlueprint_Execute, RemoveBlueprint_CanExecute);
         }
 
         public RoomBlueprintLibraryViewModel(LevelBlueprintViewModel parent)
@@ -68,19 +60,6 @@ namespace TopDownLevelEditor.ViewModels
         {
             InitializeCommands();
         }
-
-        //public RoomBlueprintLibraryViewModel(SerializationInfo info, StreamingContext context)
-        //{
-        //    //ParentLevel = parent;
-
-        //    BlueprintItems = new ObservableCollection<RoomBlueprintViewModel>();
-        //    var itemCount = info.GetValue<int>(nameof(BlueprintItems));
-        //    for (int i = 0; i < itemCount; i++)
-        //    {
-        //        BlueprintItems.Add(new RoomBlueprintViewModel(info, context) { ParentLevel = this.ParentLevel });
-        //    }
-        //    InitializeCommands();
-        //}
 
         private void RemoveBlueprint_Execute(object obj)
         {
@@ -106,7 +85,6 @@ namespace TopDownLevelEditor.ViewModels
         {
             var newBlueprint = new RoomBlueprintViewModel() { ParentLevel = ParentLevel };
             BlueprintItems.Add(newBlueprint);
-            //if (BlueprintItems.Count() == 1)
             SelectedBlueprint = newBlueprint;
         }
 
@@ -132,16 +110,6 @@ namespace TopDownLevelEditor.ViewModels
                     }
                 }
             }
-
         }
-
-        //public void GetObjectData(SerializationInfo info, StreamingContext context)
-        //{
-        //    info.AddValue(nameof(BlueprintItems), _BlueprintItems.Count);
-        //    foreach(var room in BlueprintItems)
-        //    {
-        //        room.GetObjectData(info, context);
-        //    }
-        //}
     }
 }

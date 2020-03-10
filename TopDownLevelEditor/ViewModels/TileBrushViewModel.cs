@@ -9,12 +9,6 @@ namespace TopDownLevelEditor.ViewModels
 {
     public class TileBrushViewModel : NotifyBase, ITileBrush
     {
-        //private TileType _TileType = TileType.Terrain;
-        //public TileType TileType
-        //{
-        //    get => _TileType;
-        //}
-
         public int TileId
         {
             get => (32 * PaletteGridY) + PaletteGridX;

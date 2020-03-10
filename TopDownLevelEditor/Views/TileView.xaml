@@ -6,9 +6,6 @@
              xmlns:local="clr-namespace:TopDownLevelEditor.Views"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
-    <!--<UserControl.RenderTransform>
-        <TranslateTransform X="{Binding RoomDrawPositionX}" Y="{Binding RoomDrawPositionY}"/>
-    </UserControl.RenderTransform>-->
     <UserControl.Resources>
         <Image x:Key="PaletteImage" Source="C:\\Users\\DMalD\\source\\repos\\TopDownLevelEditor\\TopDownLevelEditor\\Assets\\PNG\\Palette.png" />
     </UserControl.Resources>
