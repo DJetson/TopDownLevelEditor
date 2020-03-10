@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.PlatformUI;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -36,18 +37,49 @@ namespace TopDownLevelEditor.ViewModels
 
         private void LoadLevelBlueprint_Execute(object obj)
         {
-            IFormatter formatter = new BinaryFormatter();
-            FileStream s = new FileStream("./test.lbp", FileMode.Open);
-            LevelContext = (LevelBlueprintViewModel)formatter.Deserialize(s);
-            s.Close();
+            var openDialog = new OpenFileDialog()
+            {
+                Filter = "Level Blueprint (.lbp)|*.lbp",
+                DefaultExt = ".lbp",
+                AddExtension = true,
+                CheckPathExists = true,
+            };
+
+            openDialog.FileOk += (sender, e) =>
+            {
+                var Sender = sender as OpenFileDialog;
+
+                IFormatter formatter = new BinaryFormatter();
+                FileStream s = new FileStream(Sender.FileName, FileMode.Open);
+                LevelContext = (LevelBlueprintViewModel)formatter.Deserialize(s);
+                s.Close();
+            };
+
+            openDialog.ShowDialog();
         }
 
         private void SaveLevelBlueprint_Execute(object obj)
         {
-            IFormatter formatter = new BinaryFormatter();
-            FileStream s = new FileStream("./test.lbp", FileMode.Create);
-            formatter.Serialize(s, LevelContext);
-            s.Close();
+            var saveDialog = new SaveFileDialog()
+            {
+                Filter = "Level Blueprint (.lbp)|*.lbp",
+                DefaultExt = ".lbp",
+                AddExtension = true,
+                CheckPathExists = true,
+                OverwritePrompt = true,
+            };
+
+            saveDialog.FileOk += (sender, e) =>
+            {
+                var Sender = sender as SaveFileDialog;
+
+                IFormatter formatter = new BinaryFormatter();
+                FileStream s = new FileStream(Sender.FileName, FileMode.Create);
+                formatter.Serialize(s, LevelContext);
+                s.Close();
+            };
+
+            saveDialog.ShowDialog();
         }
 
         private int _BrushX = 0;
