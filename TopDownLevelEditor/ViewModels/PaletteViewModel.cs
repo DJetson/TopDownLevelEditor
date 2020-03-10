@@ -35,7 +35,7 @@ namespace TopDownLevelEditor.ViewModels
             set { _TileBrushItems = value; NotifyPropertyChanged(); }
         }
 
-        private TileBrushViewModel _SelectedTileBrush = new TileBrushViewModel() { TilePaletteX = 0, TilePaletteY = 0 };
+        private TileBrushViewModel _SelectedTileBrush = new TileBrushViewModel() { PaletteGridX = 0, PaletteGridY = 0 };
         public TileBrushViewModel SelectedTileBrush
         {
             get => _SelectedTileBrush;
@@ -44,8 +44,8 @@ namespace TopDownLevelEditor.ViewModels
 
         public static void SetTileBrush(int brushX, int brushY)
         {
-            Instance.SelectedTileBrush.TilePaletteX = brushX;
-            Instance.SelectedTileBrush.TilePaletteY = brushY;
+            Instance.SelectedTileBrush.PaletteGridX = brushX;
+            Instance.SelectedTileBrush.PaletteGridY = brushY;
         }
 
         public static TileBrushViewModel GetTileBrush()

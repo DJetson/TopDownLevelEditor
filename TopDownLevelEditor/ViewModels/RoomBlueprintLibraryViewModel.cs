@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -10,17 +11,18 @@ using TopDownLevelEditor.Interfaces;
 
 namespace TopDownLevelEditor.ViewModels
 {
-    public class BlueprintLibraryViewModel : NotifyBase, IBlueprintLibrary
+    [Serializable]
+    public class RoomBlueprintLibraryViewModel : NotifyBase, IRoomBlueprintLibrary
     {
-        private LevelViewModel _ParentLevel;
-        public LevelViewModel ParentLevel
+        private ILevelBlueprint _ParentLevel;
+        public ILevelBlueprint ParentLevel
         {
             get => _ParentLevel;
             set { _ParentLevel = value; NotifyPropertyChanged(); }
         }
 
-        private ObservableCollection<IRoomBlueprint> _BlueprintItems = new ObservableCollection<IRoomBlueprint>();
-        public ObservableCollection<IRoomBlueprint> BlueprintItems
+        private ObservableCollection<RoomBlueprintViewModel> _BlueprintItems = new ObservableCollection<RoomBlueprintViewModel>();
+        public ObservableCollection<RoomBlueprintViewModel> BlueprintItems
         {
             get => _BlueprintItems;
             set { _BlueprintItems = value; NotifyPropertyChanged(); }
@@ -33,40 +35,63 @@ namespace TopDownLevelEditor.ViewModels
             set { _SelectedBlueprint = value; NotifyPropertyChanged(); }
         }
 
-        private DelegateCommand _AddBlueprintCommand;
+        //[NonSerialized]
+        //private DelegateCommand _AddBlueprintCommand;
         public DelegateCommand AddBlueprintCommand
         {
-            get => _AddBlueprintCommand;
-            set { _AddBlueprintCommand = value; NotifyPropertyChanged(); }
+            get => new DelegateCommand(AddBlueprint_Execute); //_AddBlueprintCommand;
+            //set { _AddBlueprintCommand = value; NotifyPropertyChanged(); }
         }
 
-        private DelegateCommand _RemoveBlueprintCommand;
+        //[NonSerialized]
+        //private DelegateCommand _RemoveBlueprintCommand;
         public DelegateCommand RemoveBlueprintCommand
         {
-            get => _RemoveBlueprintCommand;
-            set { _RemoveBlueprintCommand = value; NotifyPropertyChanged(); }
+            get => new DelegateCommand(RemoveBlueprint_Execute, RemoveBlueprint_CanExecute);//_RemoveBlueprintCommand;
+            //set { _RemoveBlueprintCommand = value; NotifyPropertyChanged(); }
         }
 
-        public BlueprintLibraryViewModel(LevelViewModel parent)
+        public void InitializeCommands()
+        {
+            //AddBlueprintCommand = new DelegateCommand(AddBlueprint_Execute);
+            //RemoveBlueprintCommand = new DelegateCommand(RemoveBlueprint_Execute, RemoveBlueprint_CanExecute);
+        }
+
+        public RoomBlueprintLibraryViewModel(LevelBlueprintViewModel parent)
         {
             ParentLevel = parent;
             AddNewRoomBlueprint();
-            AddBlueprintCommand = new DelegateCommand(AddBlueprint_Execute);
-            RemoveBlueprintCommand = new DelegateCommand(RemoveBlueprint_Execute, RemoveBlueprint_CanExecute);
+            InitializeCommands();
         }
+
+        public RoomBlueprintLibraryViewModel()
+        {
+            InitializeCommands();
+        }
+
+        //public RoomBlueprintLibraryViewModel(SerializationInfo info, StreamingContext context)
+        //{
+        //    //ParentLevel = parent;
+
+        //    BlueprintItems = new ObservableCollection<RoomBlueprintViewModel>();
+        //    var itemCount = info.GetValue<int>(nameof(BlueprintItems));
+        //    for (int i = 0; i < itemCount; i++)
+        //    {
+        //        BlueprintItems.Add(new RoomBlueprintViewModel(info, context) { ParentLevel = this.ParentLevel });
+        //    }
+        //    InitializeCommands();
+        //}
 
         private void RemoveBlueprint_Execute(object obj)
         {
-            IRoomBlueprint selected = obj as IRoomBlueprint;
+            var selected = obj as RoomBlueprintViewModel;
 
             RemoveRoomBlueprint(selected);
         }
 
         private bool RemoveBlueprint_CanExecute(object obj)
         {
-            IRoomBlueprint selected = obj as IRoomBlueprint;
-
-            if (selected == null)
+            if (!(obj is IRoomBlueprint selected))
                 return false;
 
             return true;
@@ -85,7 +110,7 @@ namespace TopDownLevelEditor.ViewModels
             SelectedBlueprint = newBlueprint;
         }
 
-        public void RemoveRoomBlueprint(IRoomBlueprint selected)
+        public void RemoveRoomBlueprint(RoomBlueprintViewModel selected)
         {
             if (MessageBoxResult.Yes == MessageBox.Show("Delete the selected blueprint?", "Remove blueprint", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No))
             {
@@ -109,5 +134,14 @@ namespace TopDownLevelEditor.ViewModels
             }
 
         }
+
+        //public void GetObjectData(SerializationInfo info, StreamingContext context)
+        //{
+        //    info.AddValue(nameof(BlueprintItems), _BlueprintItems.Count);
+        //    foreach(var room in BlueprintItems)
+        //    {
+        //        room.GetObjectData(info, context);
+        //    }
+        //}
     }
 }

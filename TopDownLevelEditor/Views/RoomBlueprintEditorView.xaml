@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="TopDownLevelEditor.Views.RoomTileEditorView"
+﻿<UserControl x:Class="TopDownLevelEditor.Views.RoomBlueprintEditorView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -35,6 +35,14 @@
                         </Grid>
 
                         <ItemsControl x:Name="TileItemsControl" ItemsSource="{Binding Tiles}">
+                        <ItemsControl.ItemContainerStyle>
+                            <Style TargetType="{x:Type ContentPresenter}">
+                                <Style.Setters>
+                                    <Setter Property="Canvas.Left" Value="{Binding RoomDrawPositionX}"/>
+                                    <Setter Property="Canvas.Top" Value="{Binding RoomDrawPositionY}"/>
+                                </Style.Setters>
+                            </Style>
+                        </ItemsControl.ItemContainerStyle>
                             <!--<ItemsControl.Background>
                         <VisualBrush TileMode="Tile" Stretch="Uniform" Viewport="{Binding TileGridViewport}" ViewportUnits="Absolute">
                             <VisualBrush.Visual>
@@ -47,20 +55,20 @@
 
                             <ItemsControl.ItemTemplate>
                                 <ItemContainerTemplate>
-                                    <ContentPresenter Canvas.Left="{Binding DrawPositionX}" Canvas.Top="{Binding DrawPositionY}">
-                                        <ContentPresenter.Content>
+                                    <!--<ContentPresenter Canvas.Left="{Binding RoomDrawPositionX}" Canvas.Top="{Binding RoomDrawPositionY}">
+                                        <ContentPresenter.Content>-->
                                             <!--<DataTemplate DataType="{x:Type ViewModels:TileViewModel}">-->
-                                            <Views:TileView DataContext="{Binding }" Canvas.Left="{Binding DrawPositionX}" Canvas.Top="{Binding DrawPositionY}" />
+                                            <Views:TileView DataContext="{Binding }"/>
                                             <!--</DataTemplate>-->
-                                        </ContentPresenter.Content>
-                                    </ContentPresenter>
+                                        <!--</ContentPresenter.Content>
+                                    </ContentPresenter>-->
                                 </ItemContainerTemplate>
                             </ItemsControl.ItemTemplate>
-                            <ItemsControl.Resources>
+                            <!--<ItemsControl.Resources>
                                 <DataTemplate DataType="{x:Type ViewModels:TileViewModel}">
-                                    <Views:TileView DataContext="{Binding }" Canvas.Left="{Binding DrawPositionX}" Canvas.Top="{Binding DrawPositionY}" />
+                                    <Views:TileView DataContext="{Binding }" Canvas.Left="{Binding RoomDrawPositionX}" Canvas.Top="{Binding RoomDrawPositionY}" />
                                 </DataTemplate>
-                            </ItemsControl.Resources>
+                            </ItemsControl.Resources>-->
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <Canvas />
@@ -80,7 +88,7 @@
                                 <MouseBinding Command="{Binding AddTileCommand}" CommandParameter="{Binding ElementName=TileItemsControl}" Gesture="LeftClick" />
                             </Grid.InputBindings>
                             <Grid.Background>
-                                <VisualBrush TileMode="Tile" Stretch="Uniform" Viewport="{Binding TileGridViewport}" ViewportUnits="Absolute">
+                                <VisualBrush TileMode="Tile" Stretch="Uniform" Viewport="{Binding ParentLevel.LevelProperties.TileGridViewport}" ViewportUnits="Absolute">
                                     <VisualBrush.Visual>
                                         <Grid Margin="-1,-1,0,0">
                                             <Border Width="{Binding ParentLevel.LevelProperties.TileWidth}" Height="{Binding ParentLevel.LevelProperties.TileHeight}" BorderThickness="1" BorderBrush="DarkGray"/>

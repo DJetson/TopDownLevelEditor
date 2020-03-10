@@ -18,9 +18,9 @@ namespace TopDownLevelEditor.Views
     /// <summary>
     /// Interaction logic for RoomTileEditorView.xaml
     /// </summary>
-    public partial class RoomTileEditorView : UserControl
+    public partial class RoomBlueprintEditorView : UserControl
     {
-        public RoomTileEditorView()
+        public RoomBlueprintEditorView()
         {
             InitializeComponent();
         }

@@ -9,19 +9,24 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Views:BlueprintLibraryView Grid.RowSpan="2" DataContext="{Binding LevelContext.BlueprintLibrary}"/>
+        <Menu>
+            <MenuItem Header="Save Level Blueprint..." Command="{Binding SaveLevelBlueprintCommand}"/>
+            <MenuItem Header="Load Level Blueprint..." Command="{Binding LoadLevelBlueprintCommand}"/>
+        </Menu>
+        <Views:RoomBlueprintLibraryView Grid.Row="1" Grid.RowSpan="2" DataContext="{Binding LevelContext.BlueprintLibrary}"/>
 
-        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding BrushX}"/>
-        <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding BrushY}"/>
-        <ScrollViewer Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"  HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
-            <Views:RoomTileEditorView Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" PreviewMouseLeftButtonDown="RoomTileEditorView_PreviewMouseLeftButtonDown" Margin="10" DataContext="{Binding LevelContext.BlueprintLibrary.SelectedBlueprint}"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding BrushX}"/>
+        <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding BrushY}"/>
+        <ScrollViewer Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"  HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+            <Views:RoomBlueprintEditorView Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" PreviewMouseLeftButtonDown="RoomTileEditorView_PreviewMouseLeftButtonDown" Margin="10" DataContext="{Binding LevelContext.BlueprintLibrary.SelectedBlueprint}"/>
         </ScrollViewer>
     </Grid>
 </Window>

@@ -15,18 +15,23 @@ namespace TopDownLevelEditor.ViewModels
         //    get => _TileType;
         //}
 
-        private int _TilePaletteX;
-        public int TilePaletteX
+        public int TileId
         {
-            get => _TilePaletteX;
-            set { _TilePaletteX = value; NotifyPropertyChanged(); }
+            get => (32 * PaletteGridY) + PaletteGridX;
         }
 
-        private int _TilePaletteY;
-        public int TilePaletteY
+        private int _PaletteGridX;
+        public int PaletteGridX
         {
-            get => _TilePaletteY;
-            set { _TilePaletteY = value; NotifyPropertyChanged(); }
+            get => _PaletteGridX;
+            set { _PaletteGridX = value; NotifyPropertyChanged(); }
+        }
+
+        private int _PaletteGridY;
+        public int PaletteGridY
+        {
+            get => _PaletteGridY;
+            set { _PaletteGridY = value; NotifyPropertyChanged(); }
         }
     }
 }

@@ -4,10 +4,10 @@ using TopDownLevelEditor.ViewModels;
 
 namespace TopDownLevelEditor.Interfaces
 {
-    public interface IRoomBlueprint
+    public interface IRoomBlueprint /* : ISerializableBlueprint*/
     {
-        LevelViewModel ParentLevel { get; set; }
-        DelegateCommand AddTileCommand { get; set; }
+        ILevelBlueprint ParentLevel { get; set; }
+        DelegateCommand AddTileCommand { get; /*set; */}
         ObservableCollection<ITile> Tiles { get; set; }
     }
 }

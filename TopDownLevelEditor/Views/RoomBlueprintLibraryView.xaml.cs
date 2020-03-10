@@ -18,9 +18,9 @@ namespace TopDownLevelEditor.Views
     /// <summary>
     /// Interaction logic for BlueprintLibraryView.xaml
     /// </summary>
-    public partial class BlueprintLibraryView : UserControl
+    public partial class RoomBlueprintLibraryView : UserControl
     {
-        public BlueprintLibraryView()
+        public RoomBlueprintLibraryView()
         {
             InitializeComponent();
         }

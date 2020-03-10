@@ -1,19 +1,20 @@
-﻿using System.Windows;
+﻿using System.Runtime.Serialization;
+using System.Windows;
 
 namespace TopDownLevelEditor.Interfaces
 {
     public enum TileType { Terrain = 0, Pickup = 1, Item = 2, }
-    public interface ITile
+    public interface ITile /*: ISerializable*/
     {
-        int Id { get; set; }
-        double DrawPositionX { get; set; }
-        double DrawPositionY { get; set; }
-        int TilePaletteX { get; set; }
-        int TilePaletteY { get; set; }
+        int Id { get; /*set;*/ }
+        double RoomDrawPositionX { get; /*set;*/ }
+        double RoomDrawPositionY { get; /*set;*/ }
+        int PaletteGridX { get; set; }
+        int PaletteGridY { get; set; }
         double TileWidth { get; set; }
-        Rect TileViewBox { get; set; }
         double TileHeight { get; set; }
-        int TileUnitX { get; set; }
-        int TileUnitY { get; set; }
+        Rect TileViewBox { get; /*set;*/ }
+        int RoomGridX { get; set; }
+        int RoomGridY { get; set; }
     }
 }

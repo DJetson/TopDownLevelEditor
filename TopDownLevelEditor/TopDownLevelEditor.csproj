@@ -24,6 +24,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -61,20 +63,28 @@
     </ApplicationDefinition>
     <Compile Include="Commands\AddTileCommand.cs" />
     <Compile Include="Commands\RequeryBase.cs" />
-    <Compile Include="ViewModels\LevelPropertiesViewModel.cs" />
+    <Compile Include="Extensions\SerializationInfoExtensions.cs" />
+    <Compile Include="Interfaces\IBlueprintSerializer.cs" />
+    <Compile Include="Interfaces\ILevelBlueprintProperties.cs" />
+    <Compile Include="Interfaces\ISerializableBlueprint.cs" />
+    <Compile Include="Serialization\LevelBlueprintSerializer.cs" />
+    <Compile Include="Serialization\TileSerializer.cs" />
+    <Compile Include="Serialization\TokenizeRoomSerializer.cs" />
+    <Compile Include="Interfaces\ILevelBlueprint.cs" />
+    <Compile Include="ViewModels\LevelBlueprintPropertiesViewModel.cs" />
     <Compile Include="ViewModels\TileBrushViewModel.cs" />
     <Compile Include="ViewModels\TileViewModel.cs" />
-    <Compile Include="Views\BlueprintLibraryView.xaml.cs">
-      <DependentUpon>BlueprintLibraryView.xaml</DependentUpon>
+    <Compile Include="Views\RoomBlueprintLibraryView.xaml.cs">
+      <DependentUpon>RoomBlueprintLibraryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Gestures\MouseWheelUpGesture.cs" />
-    <Compile Include="Views\RoomTileEditorView.xaml.cs">
-      <DependentUpon>RoomTileEditorView.xaml</DependentUpon>
+    <Compile Include="Views\RoomBlueprintEditorView.xaml.cs">
+      <DependentUpon>RoomBlueprintEditorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TileView.xaml.cs">
       <DependentUpon>TileView.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\BlueprintLibraryView.xaml">
+    <Page Include="Views\RoomBlueprintLibraryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -86,23 +96,23 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\IBlueprintLibrary.cs" />
+    <Compile Include="Interfaces\IRoomBlueprintLibrary.cs" />
     <Compile Include="Interfaces\ITileBrush.cs" />
     <Compile Include="Interfaces\ITile.cs" />
-    <Compile Include="ViewModels\BlueprintLibraryViewModel.cs" />
+    <Compile Include="ViewModels\RoomBlueprintLibraryViewModel.cs" />
     <Compile Include="ViewModels\BrushSelectorViewModel.cs" />
     <Compile Include="Interfaces\IRoomBlueprint.cs" />
     <Compile Include="Interfaces\IPaletteViewModel.cs" />
-    <Compile Include="ViewModels\LevelViewModel.cs" />
+    <Compile Include="ViewModels\LevelBlueprintViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\NotifyBase.cs" />
     <Compile Include="ViewModels\PaletteViewModel.cs" />
-    <Compile Include="ViewModels\RoomViewModel.cs" />
+    <Compile Include="ViewModels\RoomBlueprintViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\RoomTileEditorView.xaml">
+    <Page Include="Views\RoomBlueprintEditorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
