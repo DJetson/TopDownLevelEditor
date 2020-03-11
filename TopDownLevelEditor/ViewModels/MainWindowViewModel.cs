@@ -105,14 +105,14 @@ namespace TopDownLevelEditor.ViewModels
         public int BrushX
         {
             get => _BrushX;
-            set { _BrushX = value; NotifyPropertyChanged(); PaletteViewModel.SetTileBrush(BrushX, BrushY); }
+            set { _BrushX = value; NotifyPropertyChanged(); LevelContext.LevelProperties.PaletteViewModel.SetTileBrush(BrushX, BrushY); }
         }
 
         private int _BrushY = 0;
         public int BrushY
         {
             get => _BrushY;
-            set { _BrushY = value; NotifyPropertyChanged(); PaletteViewModel.SetTileBrush(BrushX, BrushY); }
+            set { _BrushY = value; NotifyPropertyChanged(); LevelContext.LevelProperties.PaletteViewModel.SetTileBrush(BrushX, BrushY); }
         }
     }
 }

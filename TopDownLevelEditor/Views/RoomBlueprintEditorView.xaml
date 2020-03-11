@@ -26,7 +26,7 @@
                             <Grid.Background>
                                 <VisualBrush TileMode="None" Stretch="UniformToFill" >
                                     <VisualBrush.Visual>
-                                        <Image Stretch="UniformToFill" Source="{Binding ParentLevel.LevelProperties.RoomBackgroundImageSource}" />
+                                        <Image Stretch="UniformToFill" Source="{Binding ParentLevel.LevelProperties.PaletteViewModel.RoomBackgroundImageSource}" />
                                     </VisualBrush.Visual>
                                 </VisualBrush>
                             </Grid.Background>

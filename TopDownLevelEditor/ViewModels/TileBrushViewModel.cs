@@ -7,6 +7,7 @@ using TopDownLevelEditor.Interfaces;
 
 namespace TopDownLevelEditor.ViewModels
 {
+    [Serializable]
     public class TileBrushViewModel : NotifyBase, ITileBrush
     {
         public int TileId

@@ -22,12 +22,28 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="0" Text="Room Background Image Source" HorizontalAlignment="Right"/>
-        <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding RoomBackgroundImageSource}"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding PaletteViewModel.RoomBackgroundImageSource}"/>
         <Button Grid.Row="0" Grid.Column="5" Content="Browse..." Command="{Binding BrowseForRoomBackgroundCommand}" />
 
         <TextBlock Grid.Row="1" Grid.Column="0" Text="Tile Palette Image Source" HorizontalAlignment="Right"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding TilePaletteImageSource}"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding PaletteViewModel.TilePaletteImageSource}"/>
         <Button Grid.Row="1" Grid.Column="5" Content="Browse..." Command="{Binding BrowseForTilePaletteCommand}" />
 
+        <GroupBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Header="Tile Properties">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="Width" HorizontalAlignment="Right"/>
+                <TextBox Grid.Column="1" Text="{Binding TileWidth}"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Height" HorizontalAlignment="Right"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding TileHeight}"/>
+            </Grid>
+        </GroupBox>
     </Grid>
 </UserControl>

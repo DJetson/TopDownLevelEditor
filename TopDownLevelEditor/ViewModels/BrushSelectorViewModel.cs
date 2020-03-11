@@ -16,8 +16,8 @@ namespace TopDownLevelEditor.ViewModels
             set { _Selected = value; NotifyPropertyChanged(); }
         }
 
-        private PaletteViewModel _PaletteViewModel;
-        public PaletteViewModel PaletteViewModel
+        private LevelPaletteViewModel _PaletteViewModel;
+        public LevelPaletteViewModel PaletteViewModel
         {
             get => _PaletteViewModel;
             set { _PaletteViewModel = value; NotifyPropertyChanged(); }

@@ -115,7 +115,7 @@
     <Compile Include="ViewModels\LevelBlueprintViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\NotifyBase.cs" />
-    <Compile Include="ViewModels\PaletteViewModel.cs" />
+    <Compile Include="ViewModels\LevelPaletteViewModel.cs" />
     <Compile Include="ViewModels\RoomBlueprintViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

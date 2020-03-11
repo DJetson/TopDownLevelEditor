@@ -16,6 +16,13 @@ namespace TopDownLevelEditor.ViewModels
     [Serializable]
     public class LevelBlueprintPropertiesViewModel : NotifyBase/*, ISerializable*/
     {
+        private LevelPaletteViewModel _PaletteViewModel = new LevelPaletteViewModel();
+        public LevelPaletteViewModel PaletteViewModel
+        {
+            get => _PaletteViewModel;
+            set { _PaletteViewModel = value; NotifyPropertyChanged(); }
+        }
+
         /// <summary>
         /// The width of a single <see cref="Interfaces.ITile"/> in pixels
         /// </summary>
@@ -108,23 +115,23 @@ namespace TopDownLevelEditor.ViewModels
         /// The filepath of the image used as the default background for 
         /// rooms in this level
         /// </summary>
-        public string RoomBackgroundImageSource
-        {
-            get => _RoomBackgroundImageSource;
-            set { _RoomBackgroundImageSource = value; NotifyPropertyChanged(); }
-        }
-        private string _RoomBackgroundImageSource = "C:\\Users\\DMalD\\source\\repos\\TopDownLevelEditor\\TopDownLevelEditor\\Assets\\PNG\\RoomBackground.png";
+        //public string RoomBackgroundImageSource
+        //{
+        //    get => _RoomBackgroundImageSource;
+        //    set { _RoomBackgroundImageSource = value; NotifyPropertyChanged(); }
+        //}
+        //private string _RoomBackgroundImageSource = "C:\\Users\\DMalD\\source\\repos\\TopDownLevelEditor\\TopDownLevelEditor\\Assets\\PNG\\RoomBackground.png";
 
         /// <summary>
         /// The filepath of the image used as the default background for 
         /// rooms in this level
         /// </summary>
-        public string TilePaletteImageSource
-        {
-            get => _TilePaletteImageSource;
-            set { _TilePaletteImageSource = value; NotifyPropertyChanged(); }
-        }
-        private string _TilePaletteImageSource = "C:\\Users\\DMalD\\source\\repos\\TopDownLevelEditor\\TopDownLevelEditor\\Assets\\PNG\\Palette.png";
+        //public string TilePaletteImageSource
+        //{
+        //    get => _TilePaletteImageSource;
+        //    set { _TilePaletteImageSource = value; NotifyPropertyChanged(); }
+        //}
+        //private string _TilePaletteImageSource = "C:\\Users\\DMalD\\source\\repos\\TopDownLevelEditor\\TopDownLevelEditor\\Assets\\PNG\\Palette.png";
 
         public Rect TileGridViewport
         {
@@ -147,7 +154,7 @@ namespace TopDownLevelEditor.ViewModels
 
             //Validation??
 
-            TilePaletteImageSource = tilePaletteFilePath;
+            PaletteViewModel.TilePaletteImageSource = tilePaletteFilePath;
         }
 
         private void BrowseForRoomBackground_Execute(object obj)
@@ -156,7 +163,7 @@ namespace TopDownLevelEditor.ViewModels
 
             //Validation??
 
-            RoomBackgroundImageSource = roomBackgroundFilePath;
+            PaletteViewModel.RoomBackgroundImageSource = roomBackgroundFilePath;
         }
 
         private string BrowseForImageFile()
