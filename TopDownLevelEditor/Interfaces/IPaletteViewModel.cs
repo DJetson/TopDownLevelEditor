@@ -4,7 +4,7 @@ namespace TopDownLevelEditor.Interfaces
 {
     public interface IPaletteViewModel
     {
-        string ImageSource { get; set; }
+        string TilePaletteImageSource { get; set; }
         ObservableCollection<ITileBrush> TileBrushItems { get; set; }
     }
 }

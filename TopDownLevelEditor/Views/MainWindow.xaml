@@ -20,6 +20,7 @@
         <Menu>
             <MenuItem Header="Save Level Blueprint..." Command="{Binding SaveLevelBlueprintCommand}"/>
             <MenuItem Header="Load Level Blueprint..." Command="{Binding LoadLevelBlueprintCommand}"/>
+            <MenuItem Header="Level Blueprint Properties..." Command="{Binding ShowLevelBlueprintPropertiesCommand}"/>
         </Menu>
         <Views:RoomBlueprintLibraryView Grid.Row="1" Grid.RowSpan="2" DataContext="{Binding LevelContext.BlueprintLibrary}"/>
 

@@ -21,11 +21,11 @@ namespace TopDownLevelEditor.ViewModels
             }
         }
 
-        private string _ImageSource;
-        public string ImageSource
+        private string _TilePaletteImageSource;
+        public string TilePaletteImageSource
         {
-            get => _ImageSource;
-            set { _ImageSource = value; NotifyPropertyChanged(); }
+            get => _TilePaletteImageSource;
+            set { _TilePaletteImageSource = value; NotifyPropertyChanged(); }
         }
 
         private ObservableCollection<ITileBrush> _TileBrushItems = new ObservableCollection<ITileBrush>();

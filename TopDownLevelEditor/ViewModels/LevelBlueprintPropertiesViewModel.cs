@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.PlatformUI;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -127,6 +129,57 @@ namespace TopDownLevelEditor.ViewModels
         public Rect TileGridViewport
         {
             get => new Rect(0, 0, TileWidth, TileHeight);
+        }
+
+        public DelegateCommand BrowseForRoomBackgroundCommand
+        {
+            get => new DelegateCommand(BrowseForRoomBackground_Execute);
+        }
+
+        public DelegateCommand BrowseForTilePaletteCommand
+        {
+            get => new DelegateCommand(BrowseForTilePalette_Execute);
+        }
+
+        private void BrowseForTilePalette_Execute(object obj)
+        {
+            var tilePaletteFilePath = BrowseForImageFile();
+
+            //Validation??
+
+            TilePaletteImageSource = tilePaletteFilePath;
+        }
+
+        private void BrowseForRoomBackground_Execute(object obj)
+        {
+            var roomBackgroundFilePath = BrowseForImageFile();
+
+            //Validation??
+
+            RoomBackgroundImageSource = roomBackgroundFilePath;
+        }
+
+        private string BrowseForImageFile()
+        {
+            string filePath = string.Empty;
+            var openDialog = new OpenFileDialog()
+            {
+                Filter = "Supported Image Files|*.bmp;*.png;*.jpg",
+                FilterIndex = 0,
+                //DefaultExt = ".png",
+                //AddExtension = true,
+                CheckPathExists = true,
+                Multiselect = false
+            };
+
+            openDialog.FileOk += (sender, e) =>
+            {
+                var Sender = sender as OpenFileDialog;
+                filePath = Sender.FileName;
+            };
+
+            openDialog.ShowDialog();
+            return filePath;
         }
 
         public LevelBlueprintPropertiesViewModel()

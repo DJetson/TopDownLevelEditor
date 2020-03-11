@@ -8,7 +8,9 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using TopDownLevelEditor.Interfaces;
+using TopDownLevelEditor.Views.Windows;
 
 namespace TopDownLevelEditor.ViewModels
 {
@@ -30,6 +32,23 @@ namespace TopDownLevelEditor.ViewModels
         {
             get => new DelegateCommand(LoadLevelBlueprint_Execute); //_LoadLevelBlueprintCommand;
         }
+
+        public DelegateCommand ShowLevelBlueprintPropertiesCommand
+        {
+            get => new DelegateCommand(ShowLevelBlueprintProperties_Execute);
+        }
+
+        private void ShowLevelBlueprintProperties_Execute(object obj)
+        {
+            DataTemplatedViewModelWindow levelBlueprintPropertiesWindow = new DataTemplatedViewModelWindow()
+            {
+                DataContext = LevelContext.LevelProperties,
+                Owner = Application.Current.MainWindow
+            };
+
+            levelBlueprintPropertiesWindow.ShowDialog();
+        }
+
 
         public MainWindowViewModel()
         {

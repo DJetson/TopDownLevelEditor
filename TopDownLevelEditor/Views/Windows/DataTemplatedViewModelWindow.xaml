@@ -1,0 +1,29 @@
+﻿<Window x:Class="TopDownLevelEditor.Views.Windows.DataTemplatedViewModelWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Commands="clr-namespace:TopDownLevelEditor.Commands"
+        xmlns:local="clr-namespace:TopDownLevelEditor.Views.Windows"
+        xmlns:Views="clr-namespace:TopDownLevelEditor.Views"
+        xmlns:ViewModels="clr-namespace:TopDownLevelEditor.ViewModels"
+        mc:Ignorable="d"
+        Title="DataTemplatedViewModelWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Commands:CloseWindowCommand x:Key="CloseWindow" />
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <ContentControl Grid.Row="0" Content="{Binding }">
+            <ContentControl.Resources>
+                <DataTemplate DataType="{x:Type ViewModels:LevelBlueprintPropertiesViewModel}">
+                    <Views:LevelBlueprintPropertiesView DataContext="{Binding }"/>
+                </DataTemplate>
+            </ContentControl.Resources>
+        </ContentControl>
+        <Button Grid.Row="1" HorizontalAlignment="Right" Content="Close" Command="{StaticResource CloseWindow}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}"/>
+    </Grid>
+</Window>

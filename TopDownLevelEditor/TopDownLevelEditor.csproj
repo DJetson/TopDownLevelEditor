@@ -62,6 +62,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\AddTileCommand.cs" />
+    <Compile Include="Commands\CloseWindowCommand.cs" />
     <Compile Include="Commands\RequeryBase.cs" />
     <Compile Include="Extensions\SerializationInfoExtensions.cs" />
     <Compile Include="Interfaces\IBlueprintSerializer.cs" />
@@ -72,6 +73,9 @@
     <Compile Include="ViewModels\LevelBlueprintPropertiesViewModel.cs" />
     <Compile Include="ViewModels\TileBrushViewModel.cs" />
     <Compile Include="ViewModels\TileViewModel.cs" />
+    <Compile Include="Views\LevelBlueprintPropertiesView.xaml.cs">
+      <DependentUpon>LevelBlueprintPropertiesView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RoomBlueprintLibraryView.xaml.cs">
       <DependentUpon>RoomBlueprintLibraryView.xaml</DependentUpon>
     </Compile>
@@ -82,6 +86,13 @@
     <Compile Include="Views\TileView.xaml.cs">
       <DependentUpon>TileView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Windows\DataTemplatedViewModelWindow.xaml.cs">
+      <DependentUpon>DataTemplatedViewModelWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\LevelBlueprintPropertiesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\RoomBlueprintLibraryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -115,6 +126,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\TileView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\DataTemplatedViewModelWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
