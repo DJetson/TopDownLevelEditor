@@ -2,7 +2,7 @@
 
 namespace TopDownLevelEditor.Interfaces
 {
-    public interface ISerializableBlueprint : ISerializable
+    public interface ISerializableBlueprint /*: ISerializable*/
     {
     }
 }

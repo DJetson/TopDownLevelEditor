@@ -129,8 +129,8 @@ namespace TopDownLevelEditor.ViewModels
         {
             var pos = Mouse.GetPosition(obj as IInputElement);
 
-            int roomGridX = (int)(pos.X / ParentLevel.LevelProperties.TileWidth);
-            int roomGridY = (int)(pos.Y / ParentLevel.LevelProperties.TileHeight);
+            int roomGridX = (int)(pos.X / ParentLevel.LevelProperties.PaletteViewModel.TileWidth);
+            int roomGridY = (int)(pos.Y / ParentLevel.LevelProperties.PaletteViewModel.TileHeight);
 
             int tileId = ParentLevel.LevelProperties.PaletteViewModel.SelectedTileBrush.TileId;
 
@@ -145,6 +145,7 @@ namespace TopDownLevelEditor.ViewModels
         /// <param name="roomGridY">The Y-Axis placement position of the new <see cref="ITile"/> in the <see cref="Tiles"/> grid</param>
         public void AddTile(int tileId, int roomGridX, int roomGridY)
         {
+            var brush = ParentLevel.LevelProperties.PaletteViewModel.SelectedTileBrush;
             int paletteGridX = ParentLevel.LevelProperties.PaletteViewModel.GetTileBrush().PaletteGridX;
             int paletteGridY = ParentLevel.LevelProperties.PaletteViewModel.GetTileBrush().PaletteGridY;
 
@@ -154,10 +155,10 @@ namespace TopDownLevelEditor.ViewModels
             {
                 Tiles.Remove(existingTile);
             }
-            Tiles.Add(new TileViewModel(paletteGridX, paletteGridY)
+            Tiles.Add(new TileViewModel(brush.PaletteViewModel, paletteGridX, paletteGridY)
             {
-                TileWidth = ParentLevel.LevelProperties.TileWidth,
-                TileHeight = ParentLevel.LevelProperties.TileHeight,
+                TileWidth = ParentLevel.LevelProperties.PaletteViewModel.TileWidth,
+                TileHeight = ParentLevel.LevelProperties.PaletteViewModel.TileHeight,
                 RoomGridX = roomGridX,
                 RoomGridY = roomGridY,
             });

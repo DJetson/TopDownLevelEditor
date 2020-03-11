@@ -1,11 +1,13 @@
 ﻿using System.Runtime.Serialization;
 using System.Windows;
+using TopDownLevelEditor.ViewModels;
 
 namespace TopDownLevelEditor.Interfaces
 {
     public enum TileType { Terrain = 0, Pickup = 1, Item = 2, }
     public interface ITile /*: ISerializable*/
     {
+        LevelPaletteViewModel PaletteViewModel { get; set; }
         int Id { get; /*set;*/ }
         double RoomDrawPositionX { get; /*set;*/ }
         double RoomDrawPositionY { get; /*set;*/ }

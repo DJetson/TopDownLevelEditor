@@ -10,9 +10,16 @@ namespace TopDownLevelEditor.ViewModels
     [Serializable]
     public class TileBrushViewModel : NotifyBase, ITileBrush
     {
+        private LevelPaletteViewModel _PaletteViewModel;
+        public LevelPaletteViewModel PaletteViewModel
+        {
+            get => _PaletteViewModel;
+            set { _PaletteViewModel = value; NotifyPropertyChanged(); }
+        }
+
         public int TileId
         {
-            get => (32 * PaletteGridY) + PaletteGridX;
+            get => (PaletteViewModel.PaletteGridWidth * PaletteGridY) + PaletteGridX;
         }
 
         private int _PaletteGridX;
@@ -27,6 +34,13 @@ namespace TopDownLevelEditor.ViewModels
         {
             get => _PaletteGridY;
             set { _PaletteGridY = value; NotifyPropertyChanged(); }
+        }
+
+        public TileBrushViewModel(LevelPaletteViewModel paletteViewModel, int paletteX, int paletteY)
+        {
+            PaletteViewModel = paletteViewModel;
+            PaletteGridX = paletteX;
+            PaletteGridY = paletteY;
         }
     }
 }

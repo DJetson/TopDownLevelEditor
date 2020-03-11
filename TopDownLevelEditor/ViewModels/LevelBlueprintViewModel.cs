@@ -14,7 +14,7 @@ namespace TopDownLevelEditor.ViewModels
     [Serializable]
     public class LevelBlueprintViewModel : NotifyBase, ILevelBlueprint
     {
-        private LevelBlueprintPropertiesViewModel _LevelProperties = new LevelBlueprintPropertiesViewModel();
+        private LevelBlueprintPropertiesViewModel _LevelProperties;
         public LevelBlueprintPropertiesViewModel LevelProperties
         {
             get => _LevelProperties;
@@ -36,19 +36,20 @@ namespace TopDownLevelEditor.ViewModels
         public LevelBlueprintViewModel()
         {
             BlueprintLibrary = new RoomBlueprintLibraryViewModel(this);
+            LevelProperties = new LevelBlueprintPropertiesViewModel(this);
         }
 
-        public LevelBlueprintViewModel(SerializationInfo info, StreamingContext context)
-        {
-            LevelProperties = info.GetValue<LevelBlueprintPropertiesViewModel>(nameof(LevelProperties));
-            BlueprintLibrary = info.GetValue<RoomBlueprintLibraryViewModel>(nameof(BlueprintLibrary));
-            BlueprintLibrary.ParentLevel = this;
-        }
+        //public LevelBlueprintViewModel(SerializationInfo info, StreamingContext context)
+        //{
+        //    LevelProperties = info.GetValue<LevelBlueprintPropertiesViewModel>(nameof(LevelProperties));
+        //    BlueprintLibrary = info.GetValue<RoomBlueprintLibraryViewModel>(nameof(BlueprintLibrary));
+        //    BlueprintLibrary.ParentLevel = this;
+        //}
 
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue(nameof(LevelProperties), _LevelProperties);
-            info.AddValue(nameof(BlueprintLibrary), _BlueprintLibrary);
-        }
+        //public void GetObjectData(SerializationInfo info, StreamingContext context)
+        //{
+        //    info.AddValue(nameof(LevelProperties), _LevelProperties);
+        //    info.AddValue(nameof(BlueprintLibrary), _BlueprintLibrary);
+        //}
     }
 }

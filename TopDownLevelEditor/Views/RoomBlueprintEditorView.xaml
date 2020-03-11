@@ -21,7 +21,7 @@
                     <Border.LayoutTransform>
                         <ScaleTransform ScaleX="{Binding ZoomX}" ScaleY="{Binding ZoomY}"/>
                     </Border.LayoutTransform>
-                    <Grid Width="{Binding ParentLevel.LevelProperties.BackgroundWidth}" Height="{Binding ParentLevel.LevelProperties.BackgroundHeight}">
+                    <Grid Width="{Binding ParentLevel.LevelProperties.PaletteViewModel.BackgroundWidth}" Height="{Binding ParentLevel.LevelProperties.PaletteViewModel.BackgroundHeight}">
                         <Grid>
                             <Grid.Background>
                                 <VisualBrush TileMode="None" Stretch="UniformToFill" >
@@ -42,7 +42,7 @@
                         </ItemsControl.ItemContainerStyle>
                             <ItemsControl.ItemTemplate>
                                 <ItemContainerTemplate>
-                                            <Views:TileView DataContext="{Binding }"/>
+                                    <Views:TileView DataContext="{Binding }"/>
                                 </ItemContainerTemplate>
                             </ItemsControl.ItemTemplate>
                             <ItemsControl.ItemsPanel>
@@ -51,15 +51,15 @@
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
                         </ItemsControl>
-                        <Grid Width="{Binding ParentLevel.LevelProperties.ActualWidth}" Height="{Binding ParentLevel.LevelProperties.ActualHeight}">
+                        <Grid Width="{Binding ParentLevel.LevelProperties.PaletteViewModel.ActualWidth}" Height="{Binding ParentLevel.LevelProperties.PaletteViewModel.ActualHeight}">
                             <Grid.InputBindings>
                                 <MouseBinding Command="{Binding AddTileCommand}" CommandParameter="{Binding ElementName=TileItemsControl}" Gesture="LeftClick" />
                             </Grid.InputBindings>
                             <Grid.Background>
-                                <VisualBrush TileMode="Tile" Stretch="Uniform" Viewport="{Binding ParentLevel.LevelProperties.TileGridViewport}" ViewportUnits="Absolute">
+                                <VisualBrush TileMode="Tile" Stretch="Uniform" Viewport="{Binding ParentLevel.LevelProperties.PaletteViewModel.TileGridViewport}" ViewportUnits="Absolute">
                                     <VisualBrush.Visual>
                                         <Grid Margin="-1,-1,0,0">
-                                            <Border Width="{Binding ParentLevel.LevelProperties.TileWidth}" Height="{Binding ParentLevel.LevelProperties.TileHeight}" BorderThickness="1" BorderBrush="DarkGray"/>
+                                            <Border Width="{Binding ParentLevel.LevelProperties.PaletteViewModel.TileWidth}" Height="{Binding ParentLevel.LevelProperties.PaletteViewModel.TileHeight}" BorderThickness="1" BorderBrush="DarkGray"/>
                                         </Grid>
                                     </VisualBrush.Visual>
                                 </VisualBrush>

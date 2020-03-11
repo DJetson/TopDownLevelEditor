@@ -12,9 +12,16 @@ namespace TopDownLevelEditor.ViewModels
     [Serializable]
     public class TileViewModel : NotifyBase, ITile
     {
+        private LevelPaletteViewModel _PaletteViewModel;
+        public LevelPaletteViewModel PaletteViewModel
+        {
+            get => _PaletteViewModel;
+            set { _PaletteViewModel = value; NotifyPropertyChanged(); NotifyPropertyChanged(nameof(Id)); NotifyPropertyChanged(nameof(TileViewBox)); }
+        }
+
         public int Id
         {
-            get => (PaletteGridY * 32) + PaletteGridX;
+            get => (PaletteGridY * PaletteViewModel?.PaletteGridWidth ?? 0) + PaletteGridX;
         }
 
         private int _PaletteGridX;
@@ -57,7 +64,10 @@ namespace TopDownLevelEditor.ViewModels
         {
             //TODO: This should be changed so that it's calculated as:
             //      0,0,(PaletteGridX * (TileWidth/PaletteImageWidth)),(PaletteGridY * (TileHeight/PaletteImageHeight))
-            get => new Rect(PaletteGridX * 0.03125f, PaletteGridY * 0.03125f, 0.03125f, 0.03125f);
+            get => new Rect(PaletteGridX * (TileWidth / PaletteViewModel?.PaletteActualWidth ?? 1), 
+                            PaletteGridY * (TileHeight / PaletteViewModel?.PaletteActualHeight ?? 1), 
+                            (TileWidth / PaletteViewModel?.PaletteActualWidth ?? 1), 
+                            (TileHeight / PaletteViewModel?.PaletteActualHeight ?? 1));
         }
 
         private string _TilePaletteImageSource;
@@ -115,8 +125,9 @@ namespace TopDownLevelEditor.ViewModels
             }
         }
 
-        public TileViewModel(int tileX, int tileY)
+        public TileViewModel(LevelPaletteViewModel paletteViewModel, int tileX, int tileY)
         {
+            PaletteViewModel = paletteViewModel;
             PaletteGridX = tileX;
             PaletteGridY = tileY;
         }
