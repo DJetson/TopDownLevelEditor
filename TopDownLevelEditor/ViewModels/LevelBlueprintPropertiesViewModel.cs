@@ -1,11 +1,6 @@
-﻿using Microsoft.VisualStudio.PlatformUI;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
+using Prism.Commands;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace TopDownLevelEditor.ViewModels
@@ -16,6 +11,8 @@ namespace TopDownLevelEditor.ViewModels
     [Serializable]
     public class LevelBlueprintPropertiesViewModel : NotifyBase/*, ISerializable*/
     {
+        private static readonly string ThisAssemblyLocation = System.IO.Path.GetDirectoryName(typeof(LevelBlueprintPropertiesViewModel).Assembly.Location);
+
         /// <summary>
         /// The width of a single <see cref="Interfaces.ITile"/> in pixels
         /// </summary>
@@ -113,7 +110,7 @@ namespace TopDownLevelEditor.ViewModels
             get => _RoomBackgroundImageSource;
             set { _RoomBackgroundImageSource = value; NotifyPropertyChanged(); }
         }
-        private string _RoomBackgroundImageSource = "C:\\Users\\DMalD\\source\\repos\\TopDownLevelEditor\\TopDownLevelEditor\\Assets\\PNG\\RoomBackground.png";
+        private string _RoomBackgroundImageSource = System.IO.Path.Combine(ThisAssemblyLocation, @"Assets\PNG\RoomBackground.png");
 
         /// <summary>
         /// The filepath of the image used as the default background for 
@@ -124,21 +121,21 @@ namespace TopDownLevelEditor.ViewModels
             get => _TilePaletteImageSource;
             set { _TilePaletteImageSource = value; NotifyPropertyChanged(); }
         }
-        private string _TilePaletteImageSource = "C:\\Users\\DMalD\\source\\repos\\TopDownLevelEditor\\TopDownLevelEditor\\Assets\\PNG\\Palette.png";
+        private string _TilePaletteImageSource = System.IO.Path.Combine(ThisAssemblyLocation, @"Assets\PNG\Palette.png");
 
         public Rect TileGridViewport
         {
             get => new Rect(0, 0, TileWidth, TileHeight);
         }
 
-        public DelegateCommand BrowseForRoomBackgroundCommand
+        public DelegateCommand<object> BrowseForRoomBackgroundCommand
         {
-            get => new DelegateCommand(BrowseForRoomBackground_Execute);
+            get => new DelegateCommand<object>(BrowseForRoomBackground_Execute);
         }
 
-        public DelegateCommand BrowseForTilePaletteCommand
+        public DelegateCommand<object> BrowseForTilePaletteCommand
         {
-            get => new DelegateCommand(BrowseForTilePalette_Execute);
+            get => new DelegateCommand<object>(BrowseForTilePalette_Execute);
         }
 
         private void BrowseForTilePalette_Execute(object obj)

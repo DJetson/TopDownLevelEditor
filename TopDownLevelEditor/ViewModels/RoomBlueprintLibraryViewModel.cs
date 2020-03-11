@@ -1,11 +1,6 @@
-﻿using Microsoft.VisualStudio.PlatformUI;
+﻿using Prism.Commands;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using TopDownLevelEditor.Interfaces;
 
@@ -35,14 +30,14 @@ namespace TopDownLevelEditor.ViewModels
             set { _SelectedBlueprint = value; NotifyPropertyChanged(); }
         }
 
-        public DelegateCommand AddBlueprintCommand
+        public DelegateCommand<object> AddBlueprintCommand
         {
-            get => new DelegateCommand(AddBlueprint_Execute); //_AddBlueprintCommand;
+            get => new DelegateCommand<object>(AddBlueprint_Execute); //_AddBlueprintCommand;
         }
 
-        public DelegateCommand RemoveBlueprintCommand
+        public DelegateCommand<object> RemoveBlueprintCommand
         {
-            get => new DelegateCommand(RemoveBlueprint_Execute, RemoveBlueprint_CanExecute);//_RemoveBlueprintCommand;
+            get => new DelegateCommand<object>(RemoveBlueprint_Execute, RemoveBlueprint_CanExecute);//_RemoveBlueprintCommand;
         }
 
         public void InitializeCommands()

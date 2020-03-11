@@ -1,13 +1,12 @@
-﻿using Microsoft.VisualStudio.PlatformUI;
+﻿using Prism.Commands;
 using System.Collections.ObjectModel;
-using TopDownLevelEditor.ViewModels;
 
 namespace TopDownLevelEditor.Interfaces
 {
     public interface IRoomBlueprint /* : ISerializableBlueprint*/
     {
         ILevelBlueprint ParentLevel { get; set; }
-        DelegateCommand AddTileCommand { get; /*set; */}
+        DelegateCommand<object> AddTileCommand { get; /*set; */}
         ObservableCollection<ITile> Tiles { get; set; }
     }
 }

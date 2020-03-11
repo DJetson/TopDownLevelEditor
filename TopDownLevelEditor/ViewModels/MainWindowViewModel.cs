@@ -1,15 +1,9 @@
-﻿using Microsoft.VisualStudio.PlatformUI;
-using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
+﻿using Microsoft.Win32;
+using Prism.Commands;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using TopDownLevelEditor.Interfaces;
 using TopDownLevelEditor.Views.Windows;
 
 namespace TopDownLevelEditor.ViewModels
@@ -23,19 +17,19 @@ namespace TopDownLevelEditor.ViewModels
             set { _LevelContext = value; NotifyPropertyChanged(); }
         }
 
-        public DelegateCommand SaveLevelBlueprintCommand
+        public DelegateCommand<object> SaveLevelBlueprintCommand
         {
-            get => new DelegateCommand(SaveLevelBlueprint_Execute);/*_SaveLevelBlueprintCommand;*/
+            get => new DelegateCommand<object>(SaveLevelBlueprint_Execute);/*_SaveLevelBlueprintCommand;*/
         }
 
-        public DelegateCommand LoadLevelBlueprintCommand
+        public DelegateCommand<object> LoadLevelBlueprintCommand
         {
-            get => new DelegateCommand(LoadLevelBlueprint_Execute); //_LoadLevelBlueprintCommand;
+            get => new DelegateCommand<object>(LoadLevelBlueprint_Execute); //_LoadLevelBlueprintCommand;
         }
 
-        public DelegateCommand ShowLevelBlueprintPropertiesCommand
+        public DelegateCommand<object> ShowLevelBlueprintPropertiesCommand
         {
-            get => new DelegateCommand(ShowLevelBlueprintProperties_Execute);
+            get => new DelegateCommand<object>(ShowLevelBlueprintProperties_Execute);
         }
 
         private void ShowLevelBlueprintProperties_Execute(object obj)

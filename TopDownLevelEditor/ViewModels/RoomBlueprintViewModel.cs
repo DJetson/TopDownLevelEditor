@@ -1,13 +1,7 @@
-﻿using Microsoft.VisualStudio.PlatformUI;
+﻿using Prism.Commands;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using TopDownLevelEditor.Interfaces;
@@ -61,19 +55,19 @@ namespace TopDownLevelEditor.ViewModels
         private double _ZoomY = 0.52f;
 
         /// <summary>
-        /// <see cref="DelegateCommand"/> that can be used by a <see cref="ICommandSource"/> in the View Layer to trigger execution of the <see cref="RoomBlueprintViewModel.Zoom(double, double)"/> method
+        /// <see cref="DelegateCommand{T}"/> that can be used by a <see cref="ICommandSource"/> in the View Layer to trigger execution of the <see cref="RoomBlueprintViewModel.Zoom(double, double)"/> method
         /// </summary>
-        public DelegateCommand ZoomCommand
+        public DelegateCommand<object> ZoomCommand
         {
-            get => new DelegateCommand(ZoomCommand_Execute, ZoomCommand_CanExecute);//_ZoomCommand;
+            get => new DelegateCommand<object>(ZoomCommand_Execute, ZoomCommand_CanExecute);//_ZoomCommand;
         }
 
         /// <summary>
-        /// <see cref="DelegateCommand"/> that can be used by a <see cref="ICommandSource"/> in the View Layer to trigger execution of the <see cref="RoomBlueprintViewModel.AddTile(int, int, int)"/> method
+        /// <see cref="DelegateCommand{T}"/> that can be used by a <see cref="ICommandSource"/> in the View Layer to trigger execution of the <see cref="RoomBlueprintViewModel.AddTile(int, int, int)"/> method
         /// </summary>
-        public DelegateCommand AddTileCommand
+        public DelegateCommand<object> AddTileCommand
         {
-            get => new DelegateCommand(AddTileCommand_Execute, AddTileCommand_CanExecute);//_AddTileCommand;
+            get => new DelegateCommand<object>(AddTileCommand_Execute, AddTileCommand_CanExecute);//_AddTileCommand;
         }
 
         public RoomBlueprintViewModel()
