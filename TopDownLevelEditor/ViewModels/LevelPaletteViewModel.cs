@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.PlatformUI;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,7 +14,7 @@ using TopDownLevelEditor.Interfaces;
 namespace TopDownLevelEditor.ViewModels
 {
     [Serializable]
-    public class LevelPaletteViewModel : NotifyBase, IPaletteViewModel
+    public class LevelPaletteViewModel : NotifyDependentsBase, IPaletteViewModel
     {
         private LevelBlueprintPropertiesViewModel _LevelProperties;
         public LevelBlueprintPropertiesViewModel LevelProperties
@@ -21,88 +23,60 @@ namespace TopDownLevelEditor.ViewModels
             set { _LevelProperties = value; NotifyPropertyChanged(); }
         }
 
-        /// <summary>
-        /// The width of a single <see cref="Interfaces.ITile"/> in pixels
-        /// </summary>
+        private Point2 _TileSize = new Point2(64, 64);
+        public Point2 TileSize
+        {
+            get => _TileSize;
+            set { _TileSize = value; NotifyPropertyChanged(); NotifyDependentProperties(); }
+        }
+
         public double TileWidth
         {
-            get => _TileWidth;
-            set
-            {
-                _TileWidth = value;
-                NotifyPropertyChanged();
-                NotifyPropertyChanged(nameof(ActualWidth));
-                NotifyPropertyChanged(nameof(BackgroundWidth));
-
-                UpdatePaletteInfo(TilePaletteImageSource);
-                NotifyPropertyChanged(nameof(PaletteActualWidth));
-                NotifyPropertyChanged(nameof(PaletteGridWidth));
-                NotifyPropertyChanged(nameof(TileGridViewport));
-                LevelProperties.NotifyPropertyChanged(nameof(LevelProperties.RoomWidth));
-            }
+            get => _TileSize.X;
+            set { _TileSize.X = value; NotifyPropertyChanged(nameof(TileSize)); NotifyDependentProperties(nameof(TileSize)); }
         }
-        private double _TileWidth = 64.0f;
 
-        /// <summary>
-        /// The height of a single <see cref="Interfaces.ITile"/> in pixels
-        /// </summary>
         public double TileHeight
         {
-            get => _TileHeight;
-            set
-            {
-                _TileHeight = value;
-                NotifyPropertyChanged();
-                NotifyPropertyChanged(nameof(ActualHeight));
-                NotifyPropertyChanged(nameof(BackgroundHeight));
+            get => _TileSize.Y;
+            set { _TileSize.Y = value; NotifyPropertyChanged(nameof(TileSize)); NotifyDependentProperties(nameof(TileSize)); }
+        }
 
-                UpdatePaletteInfo(TilePaletteImageSource);
-                NotifyPropertyChanged(nameof(PaletteActualHeight));
-                NotifyPropertyChanged(nameof(PaletteGridHeight));
-                NotifyPropertyChanged(nameof(TileGridViewport));
-                LevelProperties.NotifyPropertyChanged(nameof(LevelProperties.RoomHeight));
+        protected override void NotifyDependentProperties([CallerMemberName] string property = "")
+        {
+            switch (property)
+            {
+                case nameof(TileSize):
+                    NotifyPropertyChanged(nameof(ActualSize));
+                    NotifyPropertyChanged(nameof(BackgroundSize));
+
+                    UpdatePaletteInfo(TilePaletteImageSource);
+                    NotifyPropertyChanged(nameof(PaletteActualSize));
+                    NotifyPropertyChanged(nameof(PaletteGridSize));
+                    NotifyPropertyChanged(nameof(TileGridViewport));
+                    LevelProperties.NotifyPropertyChanged(nameof(LevelProperties.RoomSize));
+                    break;
+                case nameof(PaletteActualSize):
+                    NotifyPropertyChanged(nameof(PaletteGridSize));
+                    break;
             }
         }
-        private double _TileHeight = 64.0f;
 
-        /// <summary>
-        /// Actual width (in Density Independent Pixels) of the Tile Grid portion of an <see cref="Interfaces.IRoomBlueprint"/>
-        /// </summary>
-        public double ActualWidth
+        public Point2 ActualSize
         {
-            get => (LevelProperties?.RoomWidth ?? 0) * TileWidth;
+            get => ((LevelProperties?.RoomSize ?? new Point2(0, 0)) * TileSize);
         }
 
-        /// <summary>
-        /// Actual height (in Density Independent Pixels) of the Tile Grid portion of an <see cref="Interfaces.IRoomBlueprint"/>
-        /// </summary>
-        public double ActualHeight
+        public Point2 BackgroundSize
         {
-            get => (LevelProperties?.RoomHeight ?? 0) * TileHeight;
-        }
-
-        /// <summary>
-        /// Actual width (in Density Independent Pixels) of the entire background portion of an <see cref="Interfaces.IRoomBlueprint"/>
-        /// This is generally equal to <see cref="ActualWidth"/> plus two additional <see cref="TileWidth"/>s
-        /// </summary>
-        public double BackgroundWidth
-        {
-            get => ActualWidth + (2 * TileWidth);
-        }
-
-        /// <summary>
-        /// Actual height (in Density Independent Pixels) of the entire background portion of an <see cref="Interfaces.IRoomBlueprint"/>
-        /// This is generally equal to <see cref="ActualHeight"/> plus two additional <see cref="TileHeight"/>s
-        /// </summary>
-        public double BackgroundHeight
-        {
-            get => ActualHeight + (2 * TileHeight);
+            get => ActualSize + (2 * TileSize);
         }
 
         public Rect TileGridViewport
         {
-            get => new Rect(0, 0, TileWidth, TileHeight);
+            get => new Rect(0, 0, TileSize.X, TileSize.Y);
         }
+
         /// <summary>
         /// The filepath of the image used as the default background for 
         /// rooms in this level
@@ -113,6 +87,14 @@ namespace TopDownLevelEditor.ViewModels
             set { _RoomBackgroundImageSource = value; NotifyPropertyChanged(); }
         }
         private string _RoomBackgroundImageSource = "C:\\Users\\DMalD\\source\\repos\\TopDownLevelEditor\\TopDownLevelEditor\\Assets\\PNG\\RoomBackground.png";
+
+        internal void ApplyPalette()
+        {
+            foreach (var brush in TileBrushItems.Where(e => e.IsValidBrush))
+            {
+                PaletteBrushes.Add(brush);
+            }
+        }
 
         /// <summary>
         /// The filepath of the image used as the default background for 
@@ -139,12 +121,11 @@ namespace TopDownLevelEditor.ViewModels
             {
                 _PaletteInfo = value;
                 NotifyPropertyChanged();
-                NotifyPropertyChanged(nameof(PaletteActualWidth));
-                NotifyPropertyChanged(nameof(PaletteActualHeight));
-                NotifyPropertyChanged(nameof(PaletteGridWidth));
-                NotifyPropertyChanged(nameof(PaletteGridHeight));
+                NotifyPropertyChanged(nameof(PaletteActualSize));
+                NotifyPropertyChanged(nameof(PaletteGridSize));
             }
         }
+
         private void UpdatePaletteInfo(string value)
         {
             using (var imageStream = File.OpenRead(TilePaletteImageSource))
@@ -152,39 +133,36 @@ namespace TopDownLevelEditor.ViewModels
                 _PaletteInfo = BitmapDecoder.Create(imageStream, BitmapCreateOptions.IgnoreColorProfile,
                     BitmapCacheOption.Default);
 
-                PaletteActualWidth = _PaletteInfo?.Frames?.First()?.PixelWidth ?? 0;
-                PaletteActualHeight = _PaletteInfo?.Frames?.First()?.PixelHeight ?? 0;
+                PaletteActualSize.X = _PaletteInfo?.Frames?.First()?.PixelWidth ?? 0;
+                PaletteActualSize.Y = _PaletteInfo?.Frames?.First()?.PixelHeight ?? 0;
+
             }
 
-            NotifyPropertyChanged(nameof(PaletteActualHeight));
-            NotifyPropertyChanged(nameof(PaletteActualWidth));
-            NotifyPropertyChanged(nameof(PaletteGridHeight));
-            NotifyPropertyChanged(nameof(PaletteGridWidth));
+            NotifyPropertyChanged(nameof(PaletteActualSize));
+            NotifyPropertyChanged(nameof(PaletteGridSize));
 
             TileBrushItems.Clear();
 
-            for (int y = 0; y < PaletteGridHeight; y++)
+            for (int y = 0; y < PaletteGridSize.Y; y++)
             {
-                for (int x = 0; x < PaletteGridWidth; x++)
+                for (int x = 0; x < PaletteGridSize.X; x++)
                 {
                     var newBrush = new TileBrushViewModel(this, x, y);
-
                     TileBrushItems.Add(newBrush);
                 }
             }
 
-            SelectedTileBrush = TileBrushItems.First();
+            ApplyPalette();
 
+            SelectedTileBrush = PaletteBrushes.FirstOrDefault();
 
-            foreach(var room in LevelProperties.LevelBlueprintViewModel.BlueprintLibrary.BlueprintItems)
+            foreach (var room in LevelProperties.LevelBlueprintViewModel.BlueprintLibrary.BlueprintItems)
             {
                 List<ITile> newTiles = new List<ITile>();
-                foreach(var tile in room.Tiles)
+                foreach (var tile in room.Tiles)
                 {
                     var newTile = new TileViewModel(this, tile.PaletteGridX, tile.PaletteGridY)
                     {
-                        TileWidth = TileWidth,
-                        TileHeight = TileHeight,
                         RoomGridX = tile.RoomGridX,
                         RoomGridY = tile.RoomGridY,
                     };
@@ -195,38 +173,28 @@ namespace TopDownLevelEditor.ViewModels
             }
         }
 
-        private double _PaletteActualHeight = 0;
-        public double PaletteActualHeight
+        private Point2 _PaletteActualSize = new Point2(0, 0);
+        public Point2 PaletteActualSize
         {
-            get => _PaletteActualHeight;
+            get => _PaletteActualSize;
             set
             {
-                _PaletteActualHeight = value;
+                _PaletteActualSize = value;
                 NotifyPropertyChanged();
-                NotifyPropertyChanged(nameof(PaletteGridHeight));
+                NotifyDependentProperties();
             }
         }
 
-        private double _PaletteActualWidth = 0;
-        public double PaletteActualWidth
+        public Point2Int PaletteGridSize
         {
-            get => _PaletteActualWidth;
-            set
-            {
-                _PaletteActualWidth = value;
-                NotifyPropertyChanged();
-                NotifyPropertyChanged(nameof(PaletteGridWidth));
-            }
+            get => (PaletteActualSize / TileSize);
         }
 
-        public int PaletteGridHeight
+        private ObservableCollection<ITileBrush> _PaletteBrushes = new ObservableCollection<ITileBrush>();
+        public ObservableCollection<ITileBrush> PaletteBrushes
         {
-            get => (int)(PaletteActualHeight / TileHeight);
-        }
-
-        public int PaletteGridWidth
-        {
-            get => (int)(PaletteActualWidth / TileWidth);
+            get => _PaletteBrushes;
+            set { _PaletteBrushes = value; NotifyPropertyChanged(); }
         }
 
         private ObservableCollection<ITileBrush> _TileBrushItems = new ObservableCollection<ITileBrush>();
@@ -245,9 +213,7 @@ namespace TopDownLevelEditor.ViewModels
 
         public void SetTileBrush(int brushX, int brushY)
         {
-            SelectedTileBrush = TileBrushItems.Where(e => e.PaletteGridX == brushX && e.PaletteGridY == brushY).First();
-            //SelectedTileBrush.PaletteGridX = brushX;
-            //SelectedTileBrush.PaletteGridY = brushY;
+            SelectedTileBrush = PaletteBrushes.Where(e => e.PaletteGridX == brushX && e.PaletteGridY == brushY).First();
         }
 
         public ITileBrush GetTileBrush()
@@ -255,22 +221,42 @@ namespace TopDownLevelEditor.ViewModels
             return SelectedTileBrush;
         }
 
+        public DelegateCommand SelectTileBrushCommand
+        {
+            get => new DelegateCommand(SelectTileBrush_Execute, SelectTileBrush_CanExecute);
+        }
+
+        private bool SelectTileBrush_CanExecute(object obj)
+        {
+            TileBrushViewModel brush = obj as TileBrushViewModel;
+            if (brush == null && obj.ToString() != "Erase")
+                return false;
+
+            return true;
+        }
+
+        private void SelectTileBrush_Execute(object obj)
+        {
+            if (obj.ToString() == "Erase")
+            {
+                SelectedTileBrush = null;
+                return;
+            }
+
+            TileBrushViewModel brush = obj as TileBrushViewModel;
+
+            if (brush == null)
+                return;
+
+            SelectedTileBrush = brush;
+        }
+
         public LevelPaletteViewModel(LevelBlueprintPropertiesViewModel levelProperties)
         {
             LevelProperties = levelProperties;
             TileBrushItems = new ObservableCollection<ITileBrush>();
+            PaletteBrushes = new ObservableCollection<ITileBrush>();
             UpdatePaletteInfo(TilePaletteImageSource);
-            //for (int y = 0; y < PaletteGridHeight; y++)
-            //{
-            //    for (int x = 0; x < PaletteGridWidth; x++)
-            //    {
-            //        var newBrush = new TileBrushViewModel(this, x, y);
-
-            //        TileBrushItems.Add(newBrush);
-            //    }
-            //}
-
-            //SelectedTileBrush = TileBrushItems.First();
         }
     }
 }

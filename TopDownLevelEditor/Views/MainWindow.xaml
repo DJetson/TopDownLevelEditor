@@ -13,21 +13,23 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
+            <ColumnDefinition Width="137" MaxWidth="137"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Menu>
+        <Menu Grid.ColumnSpan="4" Grid.Row="0">
             <MenuItem Header="Save Level Blueprint..." Command="{Binding SaveLevelBlueprintCommand}"/>
             <MenuItem Header="Load Level Blueprint..." Command="{Binding LoadLevelBlueprintCommand}"/>
             <MenuItem Header="Level Blueprint Properties..." Command="{Binding ShowLevelBlueprintPropertiesCommand}"/>
         </Menu>
-        <Views:RoomBlueprintLibraryView Grid.Row="1" Grid.RowSpan="2" DataContext="{Binding LevelContext.BlueprintLibrary}"/>
+        <Views:PaletteView Grid.Row="1" Grid.RowSpan="3" DataContext="{Binding LevelContext.LevelProperties.PaletteViewModel}"/>
+        <Views:RoomBlueprintLibraryView Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" DataContext="{Binding LevelContext.BlueprintLibrary}"/>
 
-        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding BrushX}"/>
-        <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding BrushY}"/>
-        <ScrollViewer Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"  HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
-            <Views:RoomBlueprintEditorView Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" DataContext="{Binding LevelContext.BlueprintLibrary.SelectedBlueprint}"/>
+        <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding BrushX}"/>
+        <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding BrushY}"/>
+        <ScrollViewer Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2"  HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+            <Views:RoomBlueprintEditorView Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" DataContext="{Binding LevelContext.BlueprintLibrary.SelectedBlueprint}"/>
         </ScrollViewer>
     </Grid>
 </Window>

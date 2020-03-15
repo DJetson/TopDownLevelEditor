@@ -21,7 +21,7 @@ namespace TopDownLevelEditor.ViewModels
 
         public int Id
         {
-            get => (PaletteGridY * PaletteViewModel?.PaletteGridWidth ?? 0) + PaletteGridX;
+            get => (PaletteGridY * PaletteViewModel?.PaletteGridSize.X ?? 0) + PaletteGridX;
         }
 
         private int _PaletteGridX;
@@ -52,22 +52,39 @@ namespace TopDownLevelEditor.ViewModels
 
         public double RoomDrawPositionX
         {
-            get => RoomGridX * TileWidth;
+            get => RoomGridX * PaletteViewModel.TileWidth;
         }
 
         public double RoomDrawPositionY
         {
-            get => RoomGridY * TileHeight;
+            get => RoomGridY * PaletteViewModel.TileHeight;
+        }
+
+        public Rect GetViewBox(int paletteX, int paletteY)
+        {
+            var palette = PaletteViewModel;
+
+            var posX = paletteX * (palette.TileSize.X / palette.PaletteActualSize.X);
+            var posY = paletteY * (palette.TileSize.Y / palette.PaletteActualSize.Y);
+            var sizeX = (palette.TileSize.X / palette.PaletteActualSize.X);
+            var sizeY = (palette.TileSize.Y / palette.PaletteActualSize.Y);
+
+            return new Rect(posX, posY, sizeX, sizeY);
+            //new Rect(PaletteGridX * (TileWidth / PaletteViewModel?.PaletteActualSize.X ?? 1),
+            //                PaletteGridY * (TileHeight / PaletteViewModel?.PaletteActualSize.Y ?? 1),
+            //                (TileWidth / PaletteViewModel?.PaletteActualSize.X ?? 1),
+            //                (TileHeight / PaletteViewModel?.PaletteActualSize.Y ?? 1));
         }
 
         public Rect TileViewBox
         {
             //TODO: This should be changed so that it's calculated as:
             //      0,0,(PaletteGridX * (TileWidth/PaletteImageWidth)),(PaletteGridY * (TileHeight/PaletteImageHeight))
-            get => new Rect(PaletteGridX * (TileWidth / PaletteViewModel?.PaletteActualWidth ?? 1), 
-                            PaletteGridY * (TileHeight / PaletteViewModel?.PaletteActualHeight ?? 1), 
-                            (TileWidth / PaletteViewModel?.PaletteActualWidth ?? 1), 
-                            (TileHeight / PaletteViewModel?.PaletteActualHeight ?? 1));
+            //get => new Rect(PaletteGridX * (TileWidth / PaletteViewModel?.PaletteActualSize.X ?? 1), 
+            //                PaletteGridY * (TileHeight / PaletteViewModel?.PaletteActualSize.Y ?? 1), 
+            //                (TileWidth / PaletteViewModel?.PaletteActualSize.X ?? 1), 
+            //                (TileHeight / PaletteViewModel?.PaletteActualSize.Y ?? 1));
+            get => GetViewBox(PaletteGridX, PaletteGridY);
         }
 
         private string _TilePaletteImageSource;
@@ -77,29 +94,29 @@ namespace TopDownLevelEditor.ViewModels
             set { _TilePaletteImageSource = value; NotifyPropertyChanged(); }
         }
 
-        private double _TileWidth = 0.0f;
-        public double TileWidth
-        {
-            get => _TileWidth;
-            set
-            {
-                _TileWidth = value;
-                NotifyPropertyChanged();
-                NotifyPropertyChanged(nameof(RoomDrawPositionX));
-            }
-        }
+        //private double _TileWidth = 0.0f;
+        //public double TileWidth
+        //{
+        //    get => _TileWidth;
+        //    set
+        //    {
+        //        _TileWidth = value;
+        //        NotifyPropertyChanged();
+        //        NotifyPropertyChanged(nameof(RoomDrawPositionX));
+        //    }
+        //}
 
-        private double _TileHeight = 0.0f;
-        public double TileHeight
-        {
-            get => _TileHeight;
-            set
-            {
-                _TileHeight = value;
-                NotifyPropertyChanged();
-                NotifyPropertyChanged(nameof(RoomDrawPositionY));
-            }
-        }
+        //private double _TileHeight = 0.0f;
+        //public double TileHeight
+        //{
+        //    get => _TileHeight;
+        //    set
+        //    {
+        //        _TileHeight = value;
+        //        NotifyPropertyChanged();
+        //        NotifyPropertyChanged(nameof(RoomDrawPositionY));
+        //    }
+        //}
 
         private int _RoomGridX = 0;
         public int RoomGridX

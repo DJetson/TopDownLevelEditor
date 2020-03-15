@@ -19,7 +19,7 @@ namespace TopDownLevelEditor.ViewModels
 
         public int TileId
         {
-            get => (PaletteViewModel.PaletteGridWidth * PaletteGridY) + PaletteGridX;
+            get => (PaletteViewModel.PaletteGridSize.X * PaletteGridY) + PaletteGridX;
         }
 
         private int _PaletteGridX;
@@ -36,11 +36,26 @@ namespace TopDownLevelEditor.ViewModels
             set { _PaletteGridY = value; NotifyPropertyChanged(); }
         }
 
+        private TileViewModel _TileModel;
+        public TileViewModel TileModel
+        {
+            get => _TileModel;
+            set { _TileModel = value; NotifyPropertyChanged(); }
+        }
+
+        private bool _IsValidBrush = false;
+        public bool IsValidBrush
+        {
+            get => _IsValidBrush;
+            set { _IsValidBrush = value; NotifyPropertyChanged(); }
+        }
+
         public TileBrushViewModel(LevelPaletteViewModel paletteViewModel, int paletteX, int paletteY)
         {
             PaletteViewModel = paletteViewModel;
             PaletteGridX = paletteX;
             PaletteGridY = paletteY;
+            TileModel = new TileViewModel(paletteViewModel, paletteX, paletteY);
         }
     }
 }

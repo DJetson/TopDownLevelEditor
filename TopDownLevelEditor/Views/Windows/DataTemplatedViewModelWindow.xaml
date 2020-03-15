@@ -22,6 +22,9 @@
                 <DataTemplate DataType="{x:Type ViewModels:LevelBlueprintPropertiesViewModel}">
                     <Views:LevelBlueprintPropertiesView DataContext="{Binding }"/>
                 </DataTemplate>
+                <DataTemplate DataType="{x:Type ViewModels:LevelPaletteViewModel}">
+                    <Views:PaletteEditorView DataContext="{Binding }"/>
+                </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>
         <Button Grid.Row="1" HorizontalAlignment="Right" Content="Close" Command="{StaticResource CloseWindow}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}"/>

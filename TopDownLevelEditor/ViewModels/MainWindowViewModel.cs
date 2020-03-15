@@ -52,6 +52,10 @@ namespace TopDownLevelEditor.ViewModels
 
         public MainWindowViewModel()
         {
+            IFormatter formatter = new BinaryFormatter();
+            FileStream s = new FileStream("./untitled.lbp", FileMode.Open);
+            LevelContext = (LevelBlueprintViewModel)formatter.Deserialize(s);
+            s.Close();
         }
 
         private void LoadLevelBlueprint_Execute(object obj)

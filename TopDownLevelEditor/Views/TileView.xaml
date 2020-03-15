@@ -10,7 +10,7 @@
         <Image x:Key="PaletteImage" Source="C:\\Users\\DMalD\\source\\repos\\TopDownLevelEditor\\TopDownLevelEditor\\Assets\\PNG\\Palette.png" />
     </UserControl.Resources>
     <Grid>
-        <Rectangle Stretch="Fill" Width="{Binding TileWidth}" Height="{Binding TileHeight}">
+        <Rectangle Stretch="Fill" Width="{Binding PaletteViewModel.TileWidth}" Height="{Binding PaletteViewModel.TileHeight}" >
             <Rectangle.Fill>
                 <VisualBrush Stretch="Fill" Visual="{StaticResource PaletteImage}" Viewport="0,0,1,1" Viewbox="{Binding TileViewBox}"  ViewportUnits="RelativeToBoundingBox">
                 </VisualBrush>

@@ -28,8 +28,9 @@
         <TextBlock Grid.Row="1" Grid.Column="0" Text="Tile Palette Image Source" HorizontalAlignment="Right"/>
         <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding PaletteViewModel.TilePaletteImageSource}"/>
         <Button Grid.Row="1" Grid.Column="5" Content="Browse..." Command="{Binding BrowseForTilePaletteCommand}" />
+        <Button Grid.Row="2" Content="Edit Tile Palette..." Command="{Binding ShowPaletteEditorViewCommand}" />
 
-        <GroupBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Header="Tile Properties">
+        <GroupBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Header="Tile Properties">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition />
@@ -41,8 +42,10 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="Width" HorizontalAlignment="Right"/>
                 <TextBox Grid.Column="1" Text="{Binding PaletteViewModel.TileWidth}"/>
+                <!--<TextBox Grid.Column="1" Text="{Binding PaletteViewModel.TileWidth}"/>-->
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Height" HorizontalAlignment="Right"/>
                 <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding PaletteViewModel.TileHeight}"/>
+                <!--<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding PaletteViewModel.TileHeight}"/>-->
             </Grid>
         </GroupBox>
 
@@ -57,9 +60,9 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="Room Width(Tiles)" HorizontalAlignment="Right"/>
-                <TextBox Grid.Column="1" Text="{Binding RoomWidth}"/>
+                <TextBox Grid.Column="1" Text="{Binding RoomSize.X}"/>
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Room Height(Tiles)" HorizontalAlignment="Right"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding RoomHeight}"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding RoomSize.Y}"/>
             </Grid>
         </GroupBox>
     </Grid>

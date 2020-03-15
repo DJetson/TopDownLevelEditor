@@ -127,14 +127,32 @@ namespace TopDownLevelEditor.ViewModels
 
         private void AddTileCommand_Execute(object obj)
         {
+
             var pos = Mouse.GetPosition(obj as IInputElement);
 
-            int roomGridX = (int)(pos.X / ParentLevel.LevelProperties.PaletteViewModel.TileWidth);
-            int roomGridY = (int)(pos.Y / ParentLevel.LevelProperties.PaletteViewModel.TileHeight);
+            //int roomGridX = (int)(pos.X / ParentLevel.LevelProperties.PaletteViewModel.TileWidth);
+            int roomGridX = (int)(pos.X / ParentLevel.LevelProperties.PaletteViewModel.TileSize.X);
+            //int roomGridY = (int)(pos.Y / ParentLevel.LevelProperties.PaletteViewModel.TileHeight);
+            int roomGridY = (int)(pos.Y / ParentLevel.LevelProperties.PaletteViewModel.TileSize.Y);
+
+            if (ParentLevel.LevelProperties.PaletteViewModel.SelectedTileBrush == null)
+            {
+                RemoveTile(roomGridX, roomGridY);
+                return;
+            }
 
             int tileId = ParentLevel.LevelProperties.PaletteViewModel.SelectedTileBrush.TileId;
 
             AddTile(tileId, roomGridX, roomGridY);
+        }
+
+        private void RemoveTile(int roomGridX, int roomGridY)
+        {
+            var existingTile = Tiles.Where(e => e.RoomGridX == roomGridX && e.RoomGridY == roomGridY).FirstOrDefault();
+            if (existingTile != null)
+            {
+                Tiles.Remove(existingTile);
+            }
         }
 
         /// <summary>
@@ -157,8 +175,10 @@ namespace TopDownLevelEditor.ViewModels
             }
             Tiles.Add(new TileViewModel(brush.PaletteViewModel, paletteGridX, paletteGridY)
             {
-                TileWidth = ParentLevel.LevelProperties.PaletteViewModel.TileWidth,
-                TileHeight = ParentLevel.LevelProperties.PaletteViewModel.TileHeight,
+                //TileWidth = ParentLevel.LevelProperties.PaletteViewModel.TileSize.X,
+                //TileWidth = ParentLevel.LevelProperties.PaletteViewModel.TileWidth,
+                //TileHeight = ParentLevel.LevelProperties.PaletteViewModel.TileSize.Y,
+                //TileHeight = ParentLevel.LevelProperties.PaletteViewModel.TileHeight,
                 RoomGridX = roomGridX,
                 RoomGridY = roomGridY,
             });

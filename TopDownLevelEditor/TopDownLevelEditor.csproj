@@ -71,10 +71,19 @@
     <Compile Include="Serialization\TokenizeRoomSerializer.cs" />
     <Compile Include="Interfaces\ILevelBlueprint.cs" />
     <Compile Include="ViewModels\LevelBlueprintPropertiesViewModel.cs" />
+    <Compile Include="ViewModels\NotifyDependentsBase.cs" />
+    <Compile Include="ViewModels\Point2.cs" />
+    <Compile Include="ViewModels\Point2Int.cs" />
     <Compile Include="ViewModels\TileBrushViewModel.cs" />
     <Compile Include="ViewModels\TileViewModel.cs" />
     <Compile Include="Views\LevelBlueprintPropertiesView.xaml.cs">
       <DependentUpon>LevelBlueprintPropertiesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PaletteEditorView.xaml.cs">
+      <DependentUpon>PaletteEditorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PaletteView.xaml.cs">
+      <DependentUpon>PaletteView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RoomBlueprintLibraryView.xaml.cs">
       <DependentUpon>RoomBlueprintLibraryView.xaml</DependentUpon>
@@ -90,6 +99,14 @@
       <DependentUpon>DataTemplatedViewModelWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\LevelBlueprintPropertiesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PaletteEditorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PaletteView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

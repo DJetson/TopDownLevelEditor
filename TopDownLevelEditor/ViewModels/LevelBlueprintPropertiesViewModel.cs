@@ -3,10 +3,12 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using TopDownLevelEditor.Views.Windows;
 
 namespace TopDownLevelEditor.ViewModels
 {
@@ -14,7 +16,7 @@ namespace TopDownLevelEditor.ViewModels
     /// Level Properties
     /// </summary>
     [Serializable]
-    public class LevelBlueprintPropertiesViewModel : NotifyBase/*, ISerializable*/
+    public class LevelBlueprintPropertiesViewModel : NotifyDependentsBase/*, ISerializable*/
     {
         private LevelPaletteViewModel _PaletteViewModel;
         public LevelPaletteViewModel PaletteViewModel
@@ -23,44 +25,75 @@ namespace TopDownLevelEditor.ViewModels
             set { _PaletteViewModel = value; NotifyPropertyChanged(); }
         }
 
-        /// <summary>
-        /// The width of an <see cref="Interfaces.IRoomBlueprint"/> <see cref="Interfaces.ITile"/> grid in <see cref="TileWidth"/> units
-        /// </summary>
-        public int RoomWidth
+        private Point2 _RoomSize = new Point2(13, 7);
+        public Point2 RoomSize
         {
-            get => _RoomWidth;
-            set
-            {
-                _RoomWidth = value;
-                NotifyPropertyChanged();
-                PaletteViewModel.NotifyPropertyChanged(nameof(PaletteViewModel.BackgroundWidth));
-            }
+            get => _RoomSize;
+            set { _RoomSize = value; NotifyPropertyChanged(); NotifyDependentProperties(); }
         }
-        private int _RoomWidth = 13;
 
-        /// <summary>
-        /// The height of an <see cref="Interfaces.IRoomBlueprint"/> <see cref="Interfaces.ITile"/> grid in <see cref="TileHeight"/> units
-        /// </summary>
-        public int RoomHeight
+        protected override void NotifyDependentProperties([CallerMemberName]string property = "")
         {
-            get => _RoomHeight;
-            set
-            {
-                _RoomHeight = value;
-                NotifyPropertyChanged();
-                PaletteViewModel.NotifyPropertyChanged(nameof(PaletteViewModel.BackgroundHeight));
-            }
+            PaletteViewModel.NotifyPropertyChanged(nameof(PaletteViewModel.BackgroundSize));
+            //PaletteViewModel.NotifyPropertyChanged(nameof(PaletteViewModel.BackgroundHeight));
         }
-        private int _RoomHeight = 7;
+
+
+        ///// <summary>
+        ///// The width of an <see cref="Interfaces.IRoomBlueprint"/> <see cref="Interfaces.ITile"/> grid in <see cref="TileWidth"/> units
+        ///// </summary>
+        //public int RoomWidth
+        //{
+        //    get => _RoomWidth;
+        //    set
+        //    {
+        //        _RoomWidth = value;
+        //        NotifyPropertyChanged();
+        //        PaletteViewModel.NotifyPropertyChanged(nameof(PaletteViewModel.BackgroundWidth));
+        //    }
+        //}
+        //private int _RoomWidth = 13;
+
+        ///// <summary>
+        ///// The height of an <see cref="Interfaces.IRoomBlueprint"/> <see cref="Interfaces.ITile"/> grid in <see cref="TileHeight"/> units
+        ///// </summary>
+        //public int RoomHeight
+        //{
+        //    get => _RoomHeight;
+        //    set
+        //    {
+        //        _RoomHeight = value;
+        //        NotifyPropertyChanged();
+        //        PaletteViewModel.NotifyPropertyChanged(nameof(PaletteViewModel.BackgroundHeight));
+        //    }
+        //}
+        //private int _RoomHeight = 7;
 
         public DelegateCommand BrowseForRoomBackgroundCommand
         {
             get => new DelegateCommand(BrowseForRoomBackground_Execute);
         }
 
+
         public DelegateCommand BrowseForTilePaletteCommand
         {
             get => new DelegateCommand(BrowseForTilePalette_Execute);
+        }
+
+        public DelegateCommand ShowPaletteEditorViewCommand
+        {
+            get => new DelegateCommand(ShowPaletteEditorView_Execute);
+        }
+
+        private void ShowPaletteEditorView_Execute(object obj)
+        {
+            DataTemplatedViewModelWindow paletteEditorWindow = new DataTemplatedViewModelWindow()
+            {
+                DataContext = PaletteViewModel,
+                Owner = Application.Current.MainWindow
+            };
+            paletteEditorWindow.ShowDialog();
+            PaletteViewModel.ApplyPalette();
         }
 
         private void BrowseForTilePalette_Execute(object obj)

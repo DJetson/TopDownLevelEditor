@@ -13,8 +13,8 @@ namespace TopDownLevelEditor.Interfaces
         double RoomDrawPositionY { get; /*set;*/ }
         int PaletteGridX { get; set; }
         int PaletteGridY { get; set; }
-        double TileWidth { get; set; }
-        double TileHeight { get; set; }
+        //double TileWidth { get; set; }
+        //double TileHeight { get; set; }
         Rect TileViewBox { get; /*set;*/ }
         int RoomGridX { get; set; }
         int RoomGridY { get; set; }

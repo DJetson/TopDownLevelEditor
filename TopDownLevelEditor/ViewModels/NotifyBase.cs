@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 namespace TopDownLevelEditor.ViewModels
 {
     [Serializable]
-    public class NotifyBase : INotifyPropertyChanged
+    public abstract class NotifyBase : INotifyPropertyChanged
     {
         [field: NonSerializedAttribute()]
         public event PropertyChangedEventHandler PropertyChanged;

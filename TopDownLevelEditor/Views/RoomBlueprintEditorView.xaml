@@ -11,27 +11,28 @@
              xmlns:Interfaces="clr-namespace:TopDownLevelEditor.Interfaces"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-        <Grid>
-            <Border Background="Gray" BorderBrush="Black" BorderThickness="2" >
-                <Border.InputBindings>
-                    <MouseBinding Command="{Binding ZoomCommand}" CommandParameter="0.1" Gesture="{x:Static Gestures:MouseWheelGesture.WheelUp}" />
-                    <MouseBinding Command="{Binding ZoomCommand}" CommandParameter="-0.1" Gesture="{x:Static Gestures:MouseWheelGesture.WheelDown}" />
-                </Border.InputBindings>
-                <Border BorderBrush="Black" BorderThickness="5" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Border.LayoutTransform>
-                        <ScaleTransform ScaleX="{Binding ZoomX}" ScaleY="{Binding ZoomY}"/>
-                    </Border.LayoutTransform>
-                    <Grid Width="{Binding ParentLevel.LevelProperties.PaletteViewModel.BackgroundWidth}" Height="{Binding ParentLevel.LevelProperties.PaletteViewModel.BackgroundHeight}">
-                        <Grid>
-                            <Grid.Background>
-                                <VisualBrush TileMode="None" Stretch="UniformToFill" >
-                                    <VisualBrush.Visual>
-                                        <Image Stretch="UniformToFill" Source="{Binding ParentLevel.LevelProperties.PaletteViewModel.RoomBackgroundImageSource}" />
-                                    </VisualBrush.Visual>
-                                </VisualBrush>
-                            </Grid.Background>
-                        </Grid>
-                        <ItemsControl x:Name="TileItemsControl" ItemsSource="{Binding Tiles}">
+    <Grid>
+        <Border Background="Gray" BorderBrush="Black" BorderThickness="2" >
+            <Border.InputBindings>
+                <MouseBinding Command="{Binding ZoomCommand}" CommandParameter="0.1" Gesture="{x:Static Gestures:MouseWheelGesture.WheelUp}" />
+                <MouseBinding Command="{Binding ZoomCommand}" CommandParameter="-0.1" Gesture="{x:Static Gestures:MouseWheelGesture.WheelDown}" />
+            </Border.InputBindings>
+            <Border BorderBrush="Black" BorderThickness="5" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Border.LayoutTransform>
+                    <ScaleTransform ScaleX="{Binding ZoomX}" ScaleY="{Binding ZoomY}"/>
+                </Border.LayoutTransform>
+                <Grid Width="{Binding ParentLevel.LevelProperties.PaletteViewModel.BackgroundSize.X}" Height="{Binding ParentLevel.LevelProperties.PaletteViewModel.BackgroundSize.Y}">
+                    <!--<Grid Width="{Binding ParentLevel.LevelProperties.PaletteViewModel.BackgroundWidth}" Height="{Binding ParentLevel.LevelProperties.PaletteViewModel.BackgroundHeight}">-->
+                    <Grid>
+                        <Grid.Background>
+                            <VisualBrush TileMode="None" Stretch="UniformToFill" >
+                                <VisualBrush.Visual>
+                                    <Image Stretch="UniformToFill" Source="{Binding ParentLevel.LevelProperties.PaletteViewModel.RoomBackgroundImageSource}" />
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Grid.Background>
+                    </Grid>
+                    <ItemsControl x:Name="TileItemsControl" ItemsSource="{Binding Tiles}">
                         <ItemsControl.ItemContainerStyle>
                             <Style TargetType="{x:Type ContentPresenter}">
                                 <Style.Setters>
@@ -40,33 +41,35 @@
                                 </Style.Setters>
                             </Style>
                         </ItemsControl.ItemContainerStyle>
-                            <ItemsControl.ItemTemplate>
-                                <ItemContainerTemplate>
-                                    <Views:TileView DataContext="{Binding }"/>
-                                </ItemContainerTemplate>
-                            </ItemsControl.ItemTemplate>
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <Canvas />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                        </ItemsControl>
-                        <Grid Width="{Binding ParentLevel.LevelProperties.PaletteViewModel.ActualWidth}" Height="{Binding ParentLevel.LevelProperties.PaletteViewModel.ActualHeight}">
-                            <Grid.InputBindings>
-                                <MouseBinding Command="{Binding AddTileCommand}" CommandParameter="{Binding ElementName=TileItemsControl}" Gesture="LeftClick" />
-                            </Grid.InputBindings>
-                            <Grid.Background>
-                                <VisualBrush TileMode="Tile" Stretch="Uniform" Viewport="{Binding ParentLevel.LevelProperties.PaletteViewModel.TileGridViewport}" ViewportUnits="Absolute">
-                                    <VisualBrush.Visual>
-                                        <Grid Margin="-1,-1,0,0">
-                                            <Border Width="{Binding ParentLevel.LevelProperties.PaletteViewModel.TileWidth}" Height="{Binding ParentLevel.LevelProperties.PaletteViewModel.TileHeight}" BorderThickness="1" BorderBrush="DarkGray"/>
-                                        </Grid>
-                                    </VisualBrush.Visual>
-                                </VisualBrush>
-                            </Grid.Background>
-                        </Grid>
+                        <ItemsControl.ItemTemplate>
+                            <ItemContainerTemplate>
+                                <Views:TileView DataContext="{Binding }"/>
+                            </ItemContainerTemplate>
+                        </ItemsControl.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Canvas />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                    <Grid Width="{Binding ParentLevel.LevelProperties.PaletteViewModel.ActualSize.X}" Height="{Binding ParentLevel.LevelProperties.PaletteViewModel.ActualSize.Y}">
+                        <!--<Grid Width="{Binding ParentLevel.LevelProperties.PaletteViewModel.ActualWidth}" Height="{Binding ParentLevel.LevelProperties.PaletteViewModel.ActualHeight}">-->
+                        <Grid.InputBindings>
+                            <MouseBinding Command="{Binding AddTileCommand}" CommandParameter="{Binding ElementName=TileItemsControl}" Gesture="LeftClick" />
+                        </Grid.InputBindings>
+                        <Grid.Background>
+                            <VisualBrush TileMode="Tile" Stretch="Uniform" Viewport="{Binding ParentLevel.LevelProperties.PaletteViewModel.TileGridViewport}" ViewportUnits="Absolute">
+                                <VisualBrush.Visual>
+                                    <Grid Margin="-1,-1,0,0">
+                                        <Border Width="{Binding ParentLevel.LevelProperties.PaletteViewModel.TileSize.X}" Height="{Binding ParentLevel.LevelProperties.PaletteViewModel.TileSize.Y}" BorderThickness="1" BorderBrush="DarkGray"/>
+                                        <!--<Border Width="{Binding ParentLevel.LevelProperties.PaletteViewModel.TileWidth}" Height="{Binding ParentLevel.LevelProperties.PaletteViewModel.TileHeight}" BorderThickness="1" BorderBrush="DarkGray"/>-->
+                                    </Grid>
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Grid.Background>
                     </Grid>
-                </Border>
+                </Grid>
             </Border>
-        </Grid>
+        </Border>
+    </Grid>
 </UserControl>
