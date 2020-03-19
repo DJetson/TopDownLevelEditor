@@ -129,11 +129,11 @@ namespace TopDownLevelEditor.ViewModels
         {
 
             var pos = Mouse.GetPosition(obj as IInputElement);
-
             //int roomGridX = (int)(pos.X / ParentLevel.LevelProperties.PaletteViewModel.TileWidth);
             int roomGridX = (int)(pos.X / ParentLevel.LevelProperties.PaletteViewModel.TileSize.X);
             //int roomGridY = (int)(pos.Y / ParentLevel.LevelProperties.PaletteViewModel.TileHeight);
             int roomGridY = (int)(pos.Y / ParentLevel.LevelProperties.PaletteViewModel.TileSize.Y);
+
 
             if (ParentLevel.LevelProperties.PaletteViewModel.SelectedTileBrush == null)
             {
@@ -144,6 +144,8 @@ namespace TopDownLevelEditor.ViewModels
             int tileId = ParentLevel.LevelProperties.PaletteViewModel.SelectedTileBrush.TileId;
 
             AddTile(tileId, roomGridX, roomGridY);
+            MainWindowViewModel.CurrentFile.HasChanged = true;
+
         }
 
         private void RemoveTile(int roomGridX, int roomGridY)
@@ -152,6 +154,7 @@ namespace TopDownLevelEditor.ViewModels
             if (existingTile != null)
             {
                 Tiles.Remove(existingTile);
+                MainWindowViewModel.CurrentFile.HasChanged = true;
             }
         }
 

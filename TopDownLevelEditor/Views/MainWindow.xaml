@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Views="clr-namespace:TopDownLevelEditor.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="{Binding WindowTitle}" Height="450" Width="950">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <!--<RowDefinition Height="Auto" />-->
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
@@ -19,15 +19,19 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Menu Grid.ColumnSpan="4" Grid.Row="0">
-            <MenuItem Header="Save Level Blueprint..." Command="{Binding SaveLevelBlueprintCommand}"/>
-            <MenuItem Header="Load Level Blueprint..." Command="{Binding LoadLevelBlueprintCommand}"/>
-            <MenuItem Header="Level Blueprint Properties..." Command="{Binding ShowLevelBlueprintPropertiesCommand}"/>
+            <MenuItem Header="File">
+                <MenuItem Header="Save Level Blueprint..." Command="{Binding SaveLevelBlueprintCommand}"/>
+                <MenuItem Header="Load Level Blueprint..." Command="{Binding LoadLevelBlueprintCommand}"/>
+                <MenuItem Header="Export to Asset Files..." Command="{Binding ExportAssetFilesCommand}"/>
+                <MenuItem Header="Import Asset Files..." Command="{Binding ImportAssetFilesCommand}" />
+            </MenuItem>
+            <MenuItem Header="Edit">
+                <MenuItem Header="Level Blueprint Properties..." Command="{Binding ShowLevelBlueprintPropertiesCommand}"/>
+            </MenuItem>
         </Menu>
         <Views:PaletteView Grid.Row="1" Grid.RowSpan="3" DataContext="{Binding LevelContext.LevelProperties.PaletteViewModel}"/>
         <Views:RoomBlueprintLibraryView Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" DataContext="{Binding LevelContext.BlueprintLibrary}"/>
 
-        <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding BrushX}"/>
-        <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding BrushY}"/>
         <ScrollViewer Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2"  HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
             <Views:RoomBlueprintEditorView Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" DataContext="{Binding LevelContext.BlueprintLibrary.SelectedBlueprint}"/>
         </ScrollViewer>

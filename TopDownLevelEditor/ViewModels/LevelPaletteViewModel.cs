@@ -88,8 +88,10 @@ namespace TopDownLevelEditor.ViewModels
         }
         private string _RoomBackgroundImageSource = "C:\\Users\\DMalD\\source\\repos\\TopDownLevelEditor\\TopDownLevelEditor\\Assets\\PNG\\RoomBackground.png";
 
-        internal void ApplyPalette()
+        public void ApplyPalette()
         {
+            PaletteBrushes.Clear();
+
             foreach (var brush in TileBrushItems.Where(e => e.IsValidBrush))
             {
                 PaletteBrushes.Add(brush);
